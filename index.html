@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Paul Bouqueniaux — Portfolio</title>
+  <meta name="description" content="Portfolio — Analytics Engineer (MIASHS) : compétences, expérience en entreprise, parcours."/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+  <!-- Fond animé -->
+  <canvas id="bg"></canvas>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot"></span>
+      <span class="brand__name">Paul Bouqueniaux</span>
+      <span class="brand__role">Analytics Engineer</span>
+    </div>
+
+    <nav class="tabs" aria-label="Navigation">
+      <button class="tab is-active" data-tab="home">Accueil</button>
+      <button class="tab" data-tab="skills">Compétences</button>
+      <button class="tab" data-tab="work">Entreprise</button>
+      <button class="tab" data-tab="school">Parcours</button>
+      <a class="tab tab--link" href="#contact">Contact</a>
+    </nav>
+
+    <button class="burger" aria-label="Menu" aria-expanded="false">☰</button>
+  </header>
+
+  <main class="shell">
+    <!-- ACCUEIL -->
+    <section class="panel is-visible" id="home" data-panel="home">
+      <div class="hero">
+        <div class="hero__text">
+          <h1>
+            Portfolio <span class="accent">Analytics Engineer</span><br/>
+            MIASHS — Alternance
+          </h1>
+
+          <p class="lead">
+            Je construis des pipelines data (BigQuery, Git, Airflow/automatisation) et je transforme des données en KPIs utiles (Looker/Looker Studio).
+          </p>
+
+          <div class="cta">
+            <a class="btn" href="#contact">Me contacter</a>
+            <a class="btn btn--ghost" href="https://github.com/Paul-Bouqueniaux" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+
+          <div class="chips">
+            <span class="chip">BigQuery</span>
+            <span class="chip">SQL</span>
+            <span class="chip">Python</span>
+            <span class="chip">Git</span>
+            <span class="chip">Looker</span>
+          </div>
+        </div>
+
+        <div class="hero__card">
+          <!-- Photo : mets ton image dans /assets/me.jpg -->
+          <div class="avatar">
+            <img src="assets/me.jpg" alt="Photo de Paul" onerror="this.style.display='none'; this.parentElement.classList.add('avatar--placeholder');"/>
+            <div class="avatar__placeholder">
+              <div class="avatar__badge">Ajoute ta photo<br/><small>assets/me.jpg</small></div>
+            </div>
+          </div>
+
+          <div class="mini">
+            <div class="mini__item">
+              <div class="mini__k">Focus</div>
+              <div class="mini__v">Supply Chain · Data</div>
+            </div>
+            <div class="mini__item">
+              <div class="mini__k">Stack</div>
+              <div class="mini__v">SQL · BQ · Git · BI</div>
+            </div>
+            <div class="mini__item">
+              <div class="mini__k">Objectif</div>
+              <div class="mini__v">Industrialiser & scaler</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h2>À propos</h2>
+          <p>
+            Étudiant MIASHS à Lille, en alternance en tant qu’Analytics Engineer. J’aime rendre la donnée fiable, documentée, testable,
+            et utile pour les décisions (dashboards, KPIs, gouvernance).
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>Ce que tu verras ici</h2>
+          <ul class="list">
+            <li><b>Compétences</b> (tech & data)</li>
+            <li><b>Entreprise</b> : missions, apprentissages, méthodes</li>
+            <li><b>Parcours</b> : cours, notions, projets académiques</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPETENCES -->
+    <section class="panel" id="skills" data-panel="skills">
+      <h2>Compétences</h2>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Data & Analytics</h3>
+          <div class="tags">
+            <span class="tag">SQL (BigQuery)</span>
+            <span class="tag">Modélisation</span>
+            <span class="tag">Qualité de données</span>
+            <span class="tag">KPI / Metrics</span>
+          </div>
+          <p class="muted">Structurer, fiabiliser, expliquer : de la source au dashboard.</p>
+        </div>
+
+        <div class="card">
+          <h3>Engineering</h3>
+          <div class="tags">
+            <span class="tag">Git / GitHub</span>
+            <span class="tag">Automatisation</span>
+            <span class="tag">CI/CD (bases)</span>
+            <span class="tag">Orchestration (Airflow)</span>
+          </div>
+          <p class="muted">Industrialisation, versioning, déploiement, documentation.</p>
+        </div>
+
+        <div class="card">
+          <h3>BI & Visualisation</h3>
+          <div class="tags">
+            <span class="tag">Looker / Looker Studio</span>
+            <span class="tag">Tableau</span>
+            <span class="tag">Storytelling</span>
+          </div>
+          <p class="muted">Faire parler la donnée avec clarté (et sans bullshit).</p>
+        </div>
+
+        <div class="card">
+          <h3>Python / Stats</h3>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">Sklearn (bases)</span>
+            <span class="tag">Éco/Stats</span>
+          </div>
+          <p class="muted">Exploration, features, modèles simples, interprétation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENTREPRISE -->
+    <section class="panel" id="work" data-panel="work">
+      <h2>Entreprise</h2>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Missions (exemples)</h3>
+          <ul class="list">
+            <li>Création/maintenance de tables et vues dans <b>BigQuery</b></li>
+            <li>Industrialisation : <b>Git</b> + orchestration / automatisation</li>
+            <li>Alimentation et fiabilisation de <b>dashboards</b> (Looker)</li>
+            <li>Suivi qualité (contrôles, cohérence, documentation)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Ce que j’apprends</h3>
+          <ul class="list">
+            <li>Design de pipelines et bonnes pratiques data</li>
+            <li>Data governance / standards / nomenclatures</li>
+            <li>Collaboration (revues, PR, conventions)</li>
+            <li>Optimisation SQL (coût, perf, partitions)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Méthode de travail</h3>
+        <div class="timeline">
+          <div class="step"><span>1</span><p><b>Comprendre</b> le besoin métier + KPI</p></div>
+          <div class="step"><span>2</span><p><b>Tracer</b> la donnée (source → transformation → usage)</p></div>
+          <div class="step"><span>3</span><p><b>Construire</b> en SQL propre + tests simples</p></div>
+          <div class="step"><span>4</span><p><b>Versionner</b> + documenter + livrer</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARCOURS -->
+    <section class="panel" id="school" data-panel="school">
+      <h2>Parcours</h2>
+
+      <div class="cards">
+        <div class="card">
+          <h3>MIASHS — Université de Lille</h3>
+          <p class="muted">Data · Stats · Éco · Informatique</p>
+          <ul class="list">
+            <li>Statistiques / économétrie (bases + interprétation)</li>
+            <li>Data mining / ML (classification, validation)</li>
+            <li>Bases de données & SQL</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Ce que je développe</h3>
+          <ul class="list">
+            <li>Rigueur (qualité, traçabilité, reproductibilité)</li>
+            <li>Communication (KPI clairs + limites)</li>
+            <li>Autonomie (projets, itérations, livrables)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Idées pour la suite (si tu veux)</h3>
+        <div class="tags">
+          <span class="tag">Projets GitHub</span>
+          <span class="tag">Mini case study</span>
+          <span class="tag">Blog (1 article)</span>
+          <span class="tag">CV PDF</span>
+        </div>
+        <p class="muted">On pourra ajouter un onglet “Projets” avec 2–3 réalisations bien présentées.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="panel is-visible" id="contact">
+      <div class="card">
+        <h2>Contact</h2>
+        <p class="muted">Le plus simple : mail + LinkedIn.</p>
+        <div class="contact">
+          <a class="contact__item" href="mailto:paulbouqs30@gmail.com">📩 paulbouqs30@gmail.com</a>
+          <a class="contact__item" href="#" target="_blank" rel="noreferrer">🔗 LinkedIn (à ajouter)</a>
+          <a class="contact__item" href="https://github.com/Paul-Bouqueniaux" target="_blank" rel="noreferrer">💻 GitHub</a>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <span>© <span id="year"></span> Paul Bouqueniaux</span>
+      </footer>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
