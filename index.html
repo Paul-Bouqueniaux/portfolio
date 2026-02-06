@@ -23,6 +23,7 @@
       <button class="tab" data-tab="skills">Compétences</button>
       <button class="tab" data-tab="work">Entreprise</button>
       <button class="tab" data-tab="school">Parcours</button>
+      <button class="tab" data-tab="contact">Contact</button>
     </nav>
 
     <button class="burger" aria-label="Menu" aria-expanded="false">☰</button>
@@ -41,10 +42,6 @@
       <p class="lead">
         Je construis des pipelines data (BigQuery, Git, Airflow/automatisation) et je transforme des données en KPIs utiles (Looker/Looker Studio).
       </p>
-
-      <div class="cta">
-        <a class="btn" href="#contact">Me contacter</a>
-      </div>
 
       <div class="chips">
         <span class="chip">BigQuery</span>
@@ -94,7 +91,7 @@
         <li><b>Parcours</b> : cours, notions, projets académiques</li>
       </ul>
     </div>
-  </div>s
+  </div>
 </section>
 
 
@@ -223,7 +220,8 @@
     </section>
 
     <!-- CONTACT -->
-    <section id="contact">
+    <section class="panel" id="contact" data-panel="contact">
+
       <div class="card">
         <h2>Contact</h2>
         <div class="contact">
@@ -238,6 +236,7 @@
     </section>
   </main>
 
-  <script src="scripts.js"></script>
+  <script src="scripts.js" defer></script>
+
 </body>
 </html>
