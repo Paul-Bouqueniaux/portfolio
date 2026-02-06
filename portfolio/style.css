@@ -287,3 +287,21 @@ h3{ margin: 0 0 10px; font-size: 18px; }
   }
 }
 
+.avatar {
+  width: 160px;        /* ↓ un peu plus petit */
+  height: 160px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 3px solid #5da9ff;
+  box-shadow: 0 0 20px rgba(93, 169, 255, 0.35);
+  background: #0e1a2b; /* fond sombre si l'image ne remplit pas */
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;     /* ⬅️ PLUS DE COUPE */
+  object-position: center;
+}
+
+
