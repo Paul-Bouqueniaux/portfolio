@@ -304,4 +304,15 @@ h3{ margin: 0 0 10px; font-size: 18px; }
   object-position: center;
 }
 
+/* PARCOURS : badge année flexible (gère 2020-2024) */
+#school .timeline .step span{
+  width: auto;              /* ⬅️ plus de largeur fixe */
+  height: auto;             /* ⬅️ plus de hauteur fixe */
+  min-width: 56px;          /* garde un look propre pour "2026" */
+  padding: 6px 12px;        /* donne de l’air autour du texte */
+  border-radius: 999px;
+  font-size: 12px;
+  white-space: nowrap;      /* empêche le retour à la ligne */
+  flex: 0 0 auto;           /* évite l’écrasement en flex */
+}
 
