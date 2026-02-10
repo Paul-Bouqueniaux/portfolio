@@ -660,3 +660,57 @@ h3{ margin: 0 0 10px; font-size: 18px; }
   color: rgba(255,255,255,.82);
 }
 
+/* ===== Légende échelle (1 → 7) ===== */
+.scale-legend{
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--stroke);
+  background: rgba(255,255,255,.03);
+  border-radius: 14px;
+  max-width: 720px;
+}
+
+.scale-legend__title{
+  font-weight: 800;
+  font-size: 13px;
+  color: rgba(255,255,255,.88);
+  margin-bottom: 10px;
+}
+
+.scale-legend__grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.scale-legend__item{
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  color: rgba(255,255,255,.78);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.scale-legend__item b{
+  display: inline-flex;
+  min-width: 42px;
+  justify-content: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(124,92,255,.35);
+  background: rgba(124,92,255,.12);
+  color: rgba(255,255,255,.92);
+  font-weight: 900;
+}
+
+/* Un peu plus dense sur mobile */
+@media (max-width: 920px){
+  .scale-legend{
+    width: 100%;
+    max-width: 520px;
+  }
+  .scale-legend__item b{
+    min-width: 38px;
+  }
+}
