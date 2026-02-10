@@ -12,10 +12,6 @@ function showPanel(name) {
   tabs.forEach(t => t.classList.toggle("is-active", t.dataset.tab === name));
   panels.forEach(p => p.classList.toggle("is-visible", p.dataset.panel === name));
   window.scrollTo({ top: 0, behavior: "smooth" });
-
-   if (name === "skills") {
-    renderSkillsRadar(); 
-  }
 }
 
 tabs.forEach(btn => {
@@ -130,35 +126,78 @@ if (!canvas || !ctx) {
 
 function renderSkillsRadar() {
   const svg = document.getElementById("skillsRadar");
-  if (!svg) return; // radar absent -> rien à faire
+  if (!svg) return;
 
-  // (Optionnel) si tu as un conteneur de légende à remplir dynamiquement
-  const legend = document.getElementById("skillsLegend");
-
-  // Tes notes
   const skills = [
-    { label: "SQL & Modélisation", value: 3.5 },
-    { label: "Data Eng & Orchestration", value: 3.5 },
-    { label: "BI & Exposition", value: 3.5 },
-    { label: "Gouvernance & Qualité", value: 3.5 },
-    { label: "Statistiques", value: 3 }
+    { letter: "A", label: "SQL & Modélisation analytique", value: 3.5 },
+    { letter: "B", label: "Data Engineering & Orchestration", value: 3.5 },
+    { letter: "C", label: "BI & Exposition de données", value: 3.5 },
+    { letter: "D", label: "Gouvernance & Qualité data", value: 3.5 },
+    { letter: "E", label: "Statistiques", value: 3.0 }
   ];
 
-  const letters = ["A", "B", "C", "D", "E"]; // correspondance visuelle
   const maxValue = 5;
-
-  // Dimensions
   const size = 320;
   const center = size / 2;
   const radius = 120;
   const levels = 5;
 
+  const ns = "http://www.w3.org/2000/svg";
+  const angleStep = (Math.PI * 2) / skills.length;
+
   // Reset SVG
   svg.innerHTML = "";
   svg.setAttribute("viewBox", `0 0 ${size} ${size}`);
 
-  const ns = "http://www.w3.org/2000/svg";
-  const angleStep = (Math.PI * 2) / skills.length;
+  // Tooltip (créé une fois)
+  let tooltip = document.querySelector(".radar-tooltip");
+  if (!tooltip) {
+    tooltip = document.createElement("div");
+    tooltip.className = "radar-tooltip";
+    document.body.appendChild(tooltip);
+  }
+
+  function showTooltip(text, x, y) {
+    tooltip.textContent = text;
+    tooltip.style.left = `${x}px`;
+    tooltip.style.top = `${y}px`;
+    tooltip.classList.add("is-visible");
+  }
+
+  function hideTooltip() {
+    tooltip.classList.remove("is-visible");
+  }
+
+  function moveTooltip(clientX, clientY) {
+    const pad = 12;
+    tooltip.style.left = `${clientX + pad}px`;
+    tooltip.style.top = `${clientY + pad}px`;
+  }
+
+
+  // Helpers highlight
+  const dotNodes = new Map();
+  const letterNodes = new Map();
+
+  function clearActive() {
+    dotNodes.forEach(n => {
+      n.classList.remove("is-active");
+      n.setAttribute("r", "4");          // retour taille normale
+      n.setAttribute("fill", "#6fffe9"); // retour couleur normale
+    });
+    letterNodes.forEach(n => n.classList.remove("is-active"));
+  }
+
+  function setActive(letter) {
+    clearActive();
+    const dot = dotNodes.get(letter);
+    if (dot) {
+      dot.classList.add("is-active");
+      dot.setAttribute("r", "4");        // ✅ grossit sans flicker
+      dot.setAttribute("fill", "#ffffff");
+    }
+    letterNodes.get(letter)?.classList.add("is-active");
+  }
 
   // Grille circulaire
   for (let level = 1; level <= levels; level++) {
@@ -172,9 +211,10 @@ function renderSkillsRadar() {
     svg.appendChild(circle);
   }
 
-  // Axes + lettres A-E autour
-  skills.forEach((_, i) => {
+  // Axes + lettres
+  skills.forEach((s, i) => {
     const angle = i * angleStep - Math.PI / 2;
+
     const x = center + radius * Math.cos(angle);
     const y = center + radius * Math.sin(angle);
 
@@ -191,7 +231,7 @@ function renderSkillsRadar() {
     const ly = center + (radius + 18) * Math.sin(angle);
 
     const t = document.createElementNS(ns, "text");
-    t.textContent = letters[i] || "";
+    t.textContent = s.letter;
     t.setAttribute("x", lx);
     t.setAttribute("y", ly);
     t.setAttribute("fill", "rgba(255,255,255,0.85)");
@@ -199,14 +239,34 @@ function renderSkillsRadar() {
     t.setAttribute("font-weight", "800");
     t.setAttribute("text-anchor", "middle");
     t.setAttribute("dominant-baseline", "middle");
+    t.classList.add("radar-letter");
+    t.dataset.letter = s.letter;
+
+    // ✅ Hover lettre (ICI, au bon endroit)
+    t.addEventListener("mouseenter", (e) => {
+      setActive(s.letter);
+      showTooltip(`${s.letter} — ${s.label} : ${s.value} / 5`, e.clientX, e.clientY);
+      moveTooltip(e.clientX, e.clientY);
+    });
+
+    t.addEventListener("mousemove", (e) => {
+      moveTooltip(e.clientX, e.clientY);
+    });
+
+    t.addEventListener("mouseleave", () => {
+      clearActive();
+      hideTooltip();
+    });
+
     svg.appendChild(t);
+    letterNodes.set(s.letter, t);
   });
 
-  // Graduations 1..5 sur la branche verticale (axe du haut)
+  // Graduations 1..5 sur l’axe vertical (haut)
   for (let v = 1; v <= maxValue; v++) {
     const r = (v / maxValue) * radius;
-    const tx = center + 8;           // léger décalage à droite de l’axe
-    const ty = center - r;           // axe vertical vers le haut
+    const tx = center + 8;
+    const ty = center - r;
 
     const tick = document.createElementNS(ns, "text");
     tick.textContent = String(v);
@@ -220,52 +280,55 @@ function renderSkillsRadar() {
     svg.appendChild(tick);
   }
 
-  // Polygone de compétences
+  // Polygone + vertices
   let points = "";
-  skills.forEach((skill, i) => {
+  const vertices = [];
+
+  skills.forEach((s, i) => {
     const angle = i * angleStep - Math.PI / 2;
-    const r = (skill.value / maxValue) * radius;
+    const r = (s.value / maxValue) * radius;
     const x = center + r * Math.cos(angle);
     const y = center + r * Math.sin(angle);
     points += `${x},${y} `;
+    vertices.push({ letter: s.letter, x, y, skill: s });
   });
 
   const polygon = document.createElementNS(ns, "polygon");
   polygon.setAttribute("points", points.trim());
+  // ✅ Style inline (pas dépendant du CSS)
   polygon.setAttribute("fill", "rgba(130,100,255,0.35)");
   polygon.setAttribute("stroke", "#8b7cff");
   polygon.setAttribute("stroke-width", "2");
   svg.appendChild(polygon);
 
-  // Points (dots)
-  skills.forEach((skill, i) => {
-    const angle = i * angleStep - Math.PI / 2;
-    const r = (skill.value / maxValue) * radius;
-    const x = center + r * Math.cos(angle);
-    const y = center + r * Math.sin(angle);
-
+  // Points
+  vertices.forEach((v) => {
     const dot = document.createElementNS(ns, "circle");
-    dot.setAttribute("cx", x);
-    dot.setAttribute("cy", y);
+    dot.setAttribute("cx", v.x);
+    dot.setAttribute("cy", v.y);
     dot.setAttribute("r", 4);
     dot.setAttribute("fill", "#6fffe9");
-    svg.appendChild(dot);
-  });
+    dot.classList.add("radar-dot");
+    dot.dataset.letter = v.letter;
 
-  // Légende (si tu as un #skillsLegend)
-  if (legend) {
-    legend.innerHTML = skills
-      .map((s, i) => {
-        const letter = letters[i] || "";
-        return `
-          <div class="radarRow">
-            <span class="radarKey">${letter} : ${s.label}</span>
-            <span class="radarVal">${s.value} / 5</span>
-          </div>
-        `;
-      })
-      .join("");
-  }
+    dot.addEventListener("mouseenter", (e) => {
+      setActive(v.letter);
+      showTooltip(`${v.skill.letter} — ${v.skill.label} : ${v.skill.value} / 5`, e.clientX, e.clientY);
+      moveTooltip(e.clientX, e.clientY);
+    });
+
+    dot.addEventListener("mousemove", (e) => {
+      moveTooltip(e.clientX, e.clientY);
+    });
+
+    dot.addEventListener("mouseleave", () => {
+     clearActive();
+     hideTooltip();
+   });
+
+    svg.appendChild(dot);
+    dotNodes.set(v.letter, dot);
+  });
 }
 
 // Rend le radar quand le DOM est prêt

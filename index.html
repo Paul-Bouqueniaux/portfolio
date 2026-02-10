@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Paul Bouqueniaux — Portfolio</title>
+  <title>Paul Bouqueniaux - Portfolio</title>
   <meta name="description" content="Portfolio — Analytics Engineer (MIASHS) : compétences, expérience en entreprise, parcours."/>
   <link rel="stylesheet" href="style.css"/>
 </head>
@@ -183,51 +183,52 @@
     </div>
 
     <!-- Méthodes & posture data -->
-    <div class="card">
+    <div class="card card--compact">
       <h3>Méthodes & posture data</h3>
 
-      <div class="tags">
+      <div class="tags tags--compact">
         <span class="tag">Besoin métier → Data</span>
         <span class="tag">Documentation</span>
         <span class="tag">Traçabilité</span>
         <span class="tag">Bonnes pratiques</span>
-        <span class="tag">Collaboration/Interopérabilité</span>
+        <span class="tag">Collaboration / Interopérabilité</span>
         <span class="tag">Sécurité & accès</span>
         <span class="tag">Gouvernance data</span>
-        <span class="tag">Legacy → moderne </span>
-        <span class="tag">Data ownership via Terraform</span>
-
+        <span class="tag">Legacy → moderne</span>
+        <span class="tag">Data ownership (Terraform)</span>
       </div>
 
-      <p class="muted">
-        Faire le lien entre enjeux métiers, contraintes techniques et gouvernance data, dans des environnements distribués et multi-équipes.
+      <p class="muted muted--compact">
+        Faire le lien entre enjeux métiers, contraintes techniques et gouvernance data,
+        dans des environnements distribués et multi-équipes. 
         Le but étant de construire une donnée fiable, gouvernée et consommable, même quand elle ne m’appartient pas.
       </p>
     </div>
-    
-    <!-- Etoile de compétences -->
+
+    <!-- Étoile de compétences -->
     <div class="card">
-  <h3>Étoile de compétences</h3>
-  <p class="muted">
-    Niveaux indicatifs (0 à 5) — autonomie progressive, encadrement ponctuel.
-  </p>
+      <h3>Étoile de compétences</h3>
+        <p class="muted">
+          Auto-évaluation (0 à 5) — autonomie progressive, encadrement ponctuel.
+        </p>
 
-  <div class="skills-radar-wrapper">
-    <svg id="skillsRadar" width="320" height="320"></svg>
+        <div class="skills-radar-wrapper">
+          <svg id="skillsRadar" width="320" height="320"></svg>
 
-    <div class="skills-legend">
-      <div><span>SQL & Modélisation</span><b>3.5 / 5</b></div>
-      <div><span>Data Eng & Orchestration</span><b>3.5 / 5</b></div>
-      <div><span>BI & Exposition</span><b>3.5 / 5</b></div>
-      <div><span>Gouvernance & Qualité</span><b>3.5 / 5</b></div>
-      <div><span>Statistiques</span><b>3 / 5</b></div>
+        <div class="skills-legend" id="skillsLegend">
+          <div class="legend-row" data-letter="A"><span><b>A</b> : SQL & Modélisation analytique</span><b>3.5 / 5</b></div>
+          <div class="legend-row" data-letter="B"><span><b>B</b> : Data Engineering & Orchestration</span><b>3.5 / 5</b></div>
+          <div class="legend-row" data-letter="C"><span><b>C</b> : BI & Exposition de données</span><b>3.5 / 5</b></div>
+          <div class="legend-row" data-letter="D"><span><b>D</b> : Gouvernance & Qualité data</span><b>3.5 / 5</b></div>
+          <div class="legend-row" data-letter="E"><span><b>E</b> : Statistiques</span><b>3 / 5</b></div>
 
-      <p class="legend-note">
-        Lecture : 1 = notions · 3 = autonome sur cas courants · 5 = expert
-      </p>
+          <p class="legend-note">
+            Lecture : 1 = notions · 3 = autonome sur cas courants · 5 = expert
+          </p>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+
 
 
   </div>
@@ -401,7 +402,9 @@
     </section>
   </main>
 
-  <script src="scripts.js" defer></script>
+  <script src="scripts.js?v=1.4" defer></script> <!-- changer v a chaque push pour eviter ctrl shift r -->
+
+
 
 </body>
 </html>

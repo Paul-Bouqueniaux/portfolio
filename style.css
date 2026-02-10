@@ -161,20 +161,7 @@ body{
 }
 .hero__card{ display:flex; flex-direction: column; gap:14px; }
 
-.avatar{
-  position: relative;
-  border-radius: 22px;
-  overflow:hidden;
-  border:1px solid var(--stroke);
-  height: 240px;
-  background: rgba(255,255,255,.04);
-}
-.avatar img{
-  width:100%;
-  height:100%;
-  object-fit: cover;
-  display:block;
-}
+
 .avatar__placeholder{ display:none; height:100%; align-items:center; justify-content:center; }
 .avatar--placeholder .avatar__placeholder{ display:flex; }
 .avatar__badge{
@@ -286,6 +273,7 @@ h3{ margin: 0 0 10px; font-size: 18px; }
     backdrop-filter: blur(12px);
   }
 }
+
 
 .avatar {
   width: 160px;        /* ↓ un peu plus petit */
@@ -451,16 +439,6 @@ h3{ margin: 0 0 10px; font-size: 18px; }
 
 .radarNote{ margin-top: 4px; }
 
-/* Responsive */
-@media (max-width: 920px){
-  .radarWrap{
-    grid-template-columns: 1fr;
-  }
-  .radar{
-    max-width: 420px;
-  }
-}
-
 
 .skills-radar-wrapper {
   display: flex;
@@ -500,13 +478,141 @@ h3{ margin: 0 0 10px; font-size: 18px; }
   opacity: 0.7;
 }
 
-.card--compact{
-  padding: 14px;              /* un peu moins d’air */
+/* Carte compacte (Méthodes & posture data) */
+.card--compact {
+  padding: 18px 20px;
 }
 
-.clamp-4{
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;      /* <-- nombre de lignes */
-  overflow: hidden;
+/* Tags plus denses */
+.tags--compact {
+  gap: 8px;
+  margin-bottom: 12px;
 }
+
+.tags--compact .tag {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+}
+
+/* Texte plus resserré */
+.muted--compact {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* ===== Radar: layout + responsive ===== */
+.skills-radar-wrapper{
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Le SVG devient responsive */
+#skillsRadar{
+  width: 320px;
+  height: 320px;
+  max-width: 100%;
+  display: block;
+}
+
+/* Mobile: étoile au-dessus, légende dessous */
+@media (max-width: 920px){
+  .skills-radar-wrapper{
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  #skillsRadar{
+    width: 280px;
+    height: 280px;
+  }
+  .skills-legend{
+    width: 100%;
+    max-width: 520px;
+  }
+}
+
+/* ===== Légende: lignes + hover ===== */
+.skills-legend{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.legend-row{
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--stroke);
+  background: rgba(255,255,255,.03);
+  border-radius: 14px;
+  transition: transform .12s ease, background .2s ease, border-color .2s ease;
+}
+
+.legend-row.is-active{
+  border-color: rgba(124,92,255,.55);
+  background: rgba(124,92,255,.14);
+  transform: translateY(-1px);
+}
+
+/* ===== SVG: animation polygone + hover point ===== */
+.radar-shape{
+  fill: rgba(130,100,255,0.32);
+  stroke: #8b7cff;
+  stroke-width: 2;
+  opacity: 0;
+  transform: scale(.96);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Animation à l’apparition */
+.radar-animate .radar-shape{
+  animation: radarIn .45s ease-out forwards;
+}
+@keyframes radarIn{
+  to{ opacity: 1; transform: scale(1); }
+}
+
+/* Dots : pas de scale (sinon flicker) */
+.radar-dot{
+  transition: fill .12s ease, opacity .12s ease;
+}
+
+/* Le polygone ne doit pas capter la souris */
+.radar-shape{
+  pointer-events: none;
+}
+
+/* Optionnel : rendre les lettres un peu “cliquables” */
+.radar-letter{
+  cursor: default;
+  transition: opacity .15s ease, transform .15s ease;
+}
+.radar-letter.is-active{
+  opacity: 1;
+  transform: scale(1.12);
+}
+
+/* ===== Tooltip radar ===== */
+.radar-tooltip{
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(10, 14, 28, .85);
+  backdrop-filter: blur(10px);
+  color: rgba(255,255,255,.92);
+  font-size: 12px;
+  transform: translate3d(0,0,0);
+  opacity: 0;
+  transition: opacity .12s ease;
+}
+.radar-tooltip.is-visible{ opacity: 1; }
+
+.radar-letter.is-active{ fill: #6fffe9; }
