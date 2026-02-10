@@ -121,26 +121,27 @@ if (!canvas || !ctx) {
 }
 
 /* =========================
-   RADAR SKILLS (SVG)
+   RADAR SKILLS (SVG) — ÉCHELLE 7
 ========================= */
 
 function renderSkillsRadar() {
   const svg = document.getElementById("skillsRadar");
   if (!svg) return;
 
+  // ✅ NOTES SUR 7 (tu peux ajuster)
   const skills = [
-    { letter: "A", label: "SQL & Modélisation analytique", value: 3.5 },
-    { letter: "B", label: "Data Engineering & Orchestration", value: 3.5 },
-    { letter: "C", label: "BI & Exposition de données", value: 3.5 },
-    { letter: "D", label: "Gouvernance & Qualité data", value: 3.5 },
-    { letter: "E", label: "Statistiques", value: 3.0 }
+    { letter: "A", label: "SQL & Modélisation analytique", value: 4.5 },
+    { letter: "B", label: "Data Engineering & Orchestration", value: 5.0 },
+    { letter: "C", label: "BI & Exposition de données", value: 4.5 },
+    { letter: "D", label: "Gouvernance & Qualité data", value: 3.0 },
+    { letter: "E", label: "Analyse & Modélisation", value: 3.5}
   ];
 
-  const maxValue = 5;
+  const maxValue = 7;   // ✅ 7
+  const levels = 7;     // ✅ 7 cercles de grille
   const size = 320;
   const center = size / 2;
   const radius = 120;
-  const levels = 5;
 
   const ns = "http://www.w3.org/2000/svg";
   const angleStep = (Math.PI * 2) / skills.length;
@@ -157,23 +158,19 @@ function renderSkillsRadar() {
     document.body.appendChild(tooltip);
   }
 
-  function showTooltip(text, x, y) {
+  function showTooltip(text, clientX, clientY) {
     tooltip.textContent = text;
-    tooltip.style.left = `${x}px`;
-    tooltip.style.top = `${y}px`;
     tooltip.classList.add("is-visible");
+    moveTooltip(clientX, clientY);
   }
-
   function hideTooltip() {
     tooltip.classList.remove("is-visible");
   }
-
   function moveTooltip(clientX, clientY) {
     const pad = 12;
     tooltip.style.left = `${clientX + pad}px`;
     tooltip.style.top = `${clientY + pad}px`;
   }
-
 
   // Helpers highlight
   const dotNodes = new Map();
@@ -182,8 +179,8 @@ function renderSkillsRadar() {
   function clearActive() {
     dotNodes.forEach(n => {
       n.classList.remove("is-active");
-      n.setAttribute("r", "4");          // retour taille normale
-      n.setAttribute("fill", "#6fffe9"); // retour couleur normale
+      n.setAttribute("r", "4");
+      n.setAttribute("fill", "#6fffe9");
     });
     letterNodes.forEach(n => n.classList.remove("is-active"));
   }
@@ -193,13 +190,13 @@ function renderSkillsRadar() {
     const dot = dotNodes.get(letter);
     if (dot) {
       dot.classList.add("is-active");
-      dot.setAttribute("r", "4");        // ✅ grossit sans flicker
+      dot.setAttribute("r", "6");         // ✅ on grossit bien
       dot.setAttribute("fill", "#ffffff");
     }
     letterNodes.get(letter)?.classList.add("is-active");
   }
 
-  // Grille circulaire
+  // Grille circulaire (7 niveaux)
   for (let level = 1; level <= levels; level++) {
     const r = (radius / levels) * level;
     const circle = document.createElementNS(ns, "circle");
@@ -226,7 +223,6 @@ function renderSkillsRadar() {
     axis.setAttribute("stroke", "rgba(255,255,255,0.15)");
     svg.appendChild(axis);
 
-    // Lettre un peu à l'extérieur
     const lx = center + (radius + 18) * Math.cos(angle);
     const ly = center + (radius + 18) * Math.sin(angle);
 
@@ -242,17 +238,11 @@ function renderSkillsRadar() {
     t.classList.add("radar-letter");
     t.dataset.letter = s.letter;
 
-    // ✅ Hover lettre (ICI, au bon endroit)
     t.addEventListener("mouseenter", (e) => {
       setActive(s.letter);
-      showTooltip(`${s.letter} — ${s.label} : ${s.value} / 5`, e.clientX, e.clientY);
-      moveTooltip(e.clientX, e.clientY);
+      showTooltip(`${s.letter} — ${s.label} : ${s.value} / ${maxValue}`, e.clientX, e.clientY);
     });
-
-    t.addEventListener("mousemove", (e) => {
-      moveTooltip(e.clientX, e.clientY);
-    });
-
+    t.addEventListener("mousemove", (e) => moveTooltip(e.clientX, e.clientY));
     t.addEventListener("mouseleave", () => {
       clearActive();
       hideTooltip();
@@ -262,7 +252,7 @@ function renderSkillsRadar() {
     letterNodes.set(s.letter, t);
   });
 
-  // Graduations 1..5 sur l’axe vertical (haut)
+  // Graduations 1..7 sur l’axe vertical (haut)
   for (let v = 1; v <= maxValue; v++) {
     const r = (v / maxValue) * radius;
     const tx = center + 8;
@@ -295,7 +285,6 @@ function renderSkillsRadar() {
 
   const polygon = document.createElementNS(ns, "polygon");
   polygon.setAttribute("points", points.trim());
-  // ✅ Style inline (pas dépendant du CSS)
   polygon.setAttribute("fill", "rgba(130,100,255,0.35)");
   polygon.setAttribute("stroke", "#8b7cff");
   polygon.setAttribute("stroke-width", "2");
@@ -313,22 +302,18 @@ function renderSkillsRadar() {
 
     dot.addEventListener("mouseenter", (e) => {
       setActive(v.letter);
-      showTooltip(`${v.skill.letter} — ${v.skill.label} : ${v.skill.value} / 5`, e.clientX, e.clientY);
-      moveTooltip(e.clientX, e.clientY);
+      showTooltip(`${v.skill.letter} — ${v.skill.label} : ${v.skill.value} / ${maxValue}`, e.clientX, e.clientY);
     });
-
-    dot.addEventListener("mousemove", (e) => {
-      moveTooltip(e.clientX, e.clientY);
-    });
-
+    dot.addEventListener("mousemove", (e) => moveTooltip(e.clientX, e.clientY));
     dot.addEventListener("mouseleave", () => {
-     clearActive();
-     hideTooltip();
-   });
+      clearActive();
+      hideTooltip();
+    });
 
     svg.appendChild(dot);
     dotNodes.set(v.letter, dot);
   });
+
 }
 
 // Rend le radar quand le DOM est prêt
