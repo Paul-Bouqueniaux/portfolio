@@ -616,3 +616,47 @@ h3{ margin: 0 0 10px; font-size: 18px; }
 .radar-tooltip.is-visible{ opacity: 1; }
 
 .radar-letter.is-active{ fill: #6fffe9; }
+
+/* Polygone animé (léger) */
+.radar-shape{
+  fill: rgba(130,100,255,0.32);
+  stroke: #8b7cff;
+  stroke-width: 2;
+  opacity: 0;
+  transform: scale(.96);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.radar-animate .radar-shape{
+  animation: radarIn .45s ease-out forwards;
+}
+@keyframes radarIn{
+  to{ opacity: 1; transform: scale(1); }
+}
+
+/* Dots / lettres */
+.radar-dot{ cursor: pointer; }
+.radar-letter{ cursor: default; }
+.radar-letter.is-active{ fill: #6fffe9; }
+
+/* Tooltip (supporte les retours à la ligne \n) */
+.radar-tooltip{
+  white-space: pre-line; /* <- IMPORTANT */
+}
+
+/* Légende : colonne droite + badge progression */
+.legend-right{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.legend-badge{
+  font-style: normal;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.05);
+  color: rgba(255,255,255,.82);
+}
+

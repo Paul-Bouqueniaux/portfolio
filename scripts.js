@@ -126,29 +126,68 @@ if (!canvas || !ctx) {
 
 function renderSkillsRadar() {
   const svg = document.getElementById("skillsRadar");
+  const legend = document.getElementById("skillsLegend");
   if (!svg) return;
 
-  // ✅ NOTES SUR 7 (tu peux ajuster)
+  // ====== DONNÉES (SUR 7) ======
   const skills = [
-    { letter: "A", label: "SQL & Modélisation analytique", value: 4.5 },
-    { letter: "B", label: "Data Engineering & Orchestration", value: 5.0 },
-    { letter: "C", label: "BI & Exposition de données", value: 4.5 },
-    { letter: "D", label: "Gouvernance & Qualité data", value: 3.0 },
-    { letter: "E", label: "Analyse & Modélisation", value: 3.5}
+    {
+      letter: "A",
+      label: "SQL & Modélisation analytique",
+      value: 4,
+      phrase: "Capacité à comprendre et exploiter des modèles analytiques existants pour les industrialiser et les rendre robustes en production."
+    },
+    {
+      letter: "B",
+      label: "Data Engineering & Orchestration",
+      value: 5,
+      phrase: "Industrialisation via Git/Airflow/Shell/Terraform : versioning, orchestration, déploiement et maintenabilité."
+    },
+    {
+      letter: "C",
+      label: "BI & Exposition de données",
+      value: 4.5,
+      phrase: "Mise à disposition de données/KPIs fiables (Looker/Looker Studio), en lien avec usages et contraintes d’exploitation."
+    },
+    {
+      letter: "D",
+      label: "Gouvernance & Qualité data",
+      value: 3.5,
+      phrase: "Fiabilisation : contrôles, traçabilité, droits & accès, conventions et qualité pour une donnée exploitable."
+    },
+    {
+      letter: "E",
+      label: "Analyse & Modélisation",
+      value: 3,
+      phrase: "Analyse exploratoire et interprétation statistique, mobilisées surtout en contexte académique ou ponctuel."
+    }
   ];
 
-  const maxValue = 7;   // ✅ 7
-  const levels = 7;     // ✅ 7 cercles de grille
+  const maxValue = 7;
+  const levels = 7;
+
+  // ====== HELPERS (niveau “progression visuelle”) ======
+  function levelLabel(v) {
+    if (v >= 7) return "Expert";
+    if (v >= 6) return "Avancé";
+    if (v >= 5) return "Confirmé";
+    if (v >= 4) return "Autonome (cas courants)";
+    if (v >= 3) return "Intermédiaire";
+    if (v >= 2) return "Bases";
+    return "Notions";
+  }
+
+  // ====== DIMENSIONS ======
   const size = 320;
   const center = size / 2;
   const radius = 120;
-
   const ns = "http://www.w3.org/2000/svg";
   const angleStep = (Math.PI * 2) / skills.length;
 
   // Reset SVG
   svg.innerHTML = "";
   svg.setAttribute("viewBox", `0 0 ${size} ${size}`);
+  svg.classList.remove("radar-animate");
 
   // Tooltip (créé une fois)
   let tooltip = document.querySelector(".radar-tooltip");
@@ -172,7 +211,7 @@ function renderSkillsRadar() {
     tooltip.style.top = `${clientY + pad}px`;
   }
 
-  // Helpers highlight
+  // Maps pour highlight
   const dotNodes = new Map();
   const letterNodes = new Map();
 
@@ -183,6 +222,7 @@ function renderSkillsRadar() {
       n.setAttribute("fill", "#6fffe9");
     });
     letterNodes.forEach(n => n.classList.remove("is-active"));
+    legend?.querySelectorAll(".legend-row").forEach(r => r.classList.remove("is-active"));
   }
 
   function setActive(letter) {
@@ -190,13 +230,14 @@ function renderSkillsRadar() {
     const dot = dotNodes.get(letter);
     if (dot) {
       dot.classList.add("is-active");
-      dot.setAttribute("r", "6");         // ✅ on grossit bien
+      dot.setAttribute("r", "6");
       dot.setAttribute("fill", "#ffffff");
     }
     letterNodes.get(letter)?.classList.add("is-active");
+    legend?.querySelector(`.legend-row[data-letter="${letter}"]`)?.classList.add("is-active");
   }
 
-  // Grille circulaire (7 niveaux)
+  // ====== GRILLE (cercles) ======
   for (let level = 1; level <= levels; level++) {
     const r = (radius / levels) * level;
     const circle = document.createElementNS(ns, "circle");
@@ -208,10 +249,9 @@ function renderSkillsRadar() {
     svg.appendChild(circle);
   }
 
-  // Axes + lettres
+  // ====== AXES + LETTRES ======
   skills.forEach((s, i) => {
     const angle = i * angleStep - Math.PI / 2;
-
     const x = center + radius * Math.cos(angle);
     const y = center + radius * Math.sin(angle);
 
@@ -240,19 +280,16 @@ function renderSkillsRadar() {
 
     t.addEventListener("mouseenter", (e) => {
       setActive(s.letter);
-      showTooltip(`${s.letter} — ${s.label} : ${s.value} / ${maxValue}`, e.clientX, e.clientY);
+      showTooltip(`${s.letter} — ${s.label} (${s.value} / ${maxValue}) · ${levelLabel(s.value)}\n${s.phrase}`, e.clientX, e.clientY);
     });
     t.addEventListener("mousemove", (e) => moveTooltip(e.clientX, e.clientY));
-    t.addEventListener("mouseleave", () => {
-      clearActive();
-      hideTooltip();
-    });
+    t.addEventListener("mouseleave", () => { clearActive(); hideTooltip(); });
 
     svg.appendChild(t);
     letterNodes.set(s.letter, t);
   });
 
-  // Graduations 1..7 sur l’axe vertical (haut)
+  // ====== GRADUATIONS 1..7 SUR AXE VERTICAL ======
   for (let v = 1; v <= maxValue; v++) {
     const r = (v / maxValue) * radius;
     const tx = center + 8;
@@ -270,7 +307,7 @@ function renderSkillsRadar() {
     svg.appendChild(tick);
   }
 
-  // Polygone + vertices
+  // ====== POLYGONE ======
   let points = "";
   const vertices = [];
 
@@ -285,36 +322,54 @@ function renderSkillsRadar() {
 
   const polygon = document.createElementNS(ns, "polygon");
   polygon.setAttribute("points", points.trim());
-  polygon.setAttribute("fill", "rgba(130,100,255,0.35)");
-  polygon.setAttribute("stroke", "#8b7cff");
-  polygon.setAttribute("stroke-width", "2");
+  polygon.classList.add("radar-shape");
   svg.appendChild(polygon);
 
-  // Points
+  // ====== DOTS ======
   vertices.forEach((v) => {
     const dot = document.createElementNS(ns, "circle");
     dot.setAttribute("cx", v.x);
     dot.setAttribute("cy", v.y);
-    dot.setAttribute("r", 4);
+    dot.setAttribute("r", "4");
     dot.setAttribute("fill", "#6fffe9");
     dot.classList.add("radar-dot");
     dot.dataset.letter = v.letter;
 
     dot.addEventListener("mouseenter", (e) => {
       setActive(v.letter);
-      showTooltip(`${v.skill.letter} — ${v.skill.label} : ${v.skill.value} / ${maxValue}`, e.clientX, e.clientY);
+      showTooltip(`${v.skill.letter} — ${v.skill.label} (${v.skill.value} / ${maxValue}) · ${levelLabel(v.skill.value)}\n${v.skill.phrase}`, e.clientX, e.clientY);
     });
     dot.addEventListener("mousemove", (e) => moveTooltip(e.clientX, e.clientY));
-    dot.addEventListener("mouseleave", () => {
-      clearActive();
-      hideTooltip();
-    });
+    dot.addEventListener("mouseleave", () => { clearActive(); hideTooltip(); });
 
     svg.appendChild(dot);
     dotNodes.set(v.letter, dot);
   });
 
+  // ====== LÉGENDE (auto) + hover ======
+  if (legend) {
+    legend.innerHTML = skills.map(s => `
+      <div class="legend-row" data-letter="${s.letter}">
+        <span><b>${s.letter}</b> : ${s.label}</span>
+        <span class="legend-right">
+          <b>${s.value} / ${maxValue}</b>
+          <em class="legend-badge">${levelLabel(s.value)}</em>
+        </span>
+      </div>
+    `).join("");
+
+    legend.querySelectorAll(".legend-row").forEach(row => {
+      const letter = row.dataset.letter;
+      row.addEventListener("mouseenter", () => setActive(letter));
+      row.addEventListener("mouseleave", () => clearActive());
+    });
+  }
+
+  // Animation légère à l’apparition
+  requestAnimationFrame(() => svg.classList.add("radar-animate"));
 }
+
+document.addEventListener("DOMContentLoaded", renderSkillsRadar);
 
 // Rend le radar quand le DOM est prêt
 document.addEventListener("DOMContentLoaded", () => {
