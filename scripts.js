@@ -375,3 +375,30 @@ document.addEventListener("DOMContentLoaded", renderSkillsRadar);
 document.addEventListener("DOMContentLoaded", () => {
   renderSkillsRadar();
 });
+
+
+/* =========================
+   ENTREPRISE : FLIP CARDS (clic)
+========================= */
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".flip-card").forEach((card) => {
+    const inner = card.querySelector(".flip-inner");
+    const back = card.querySelector(".flip-back");
+
+    const toggle = () => {
+      const flipped = card.classList.toggle("is-flipped");
+      card.setAttribute("aria-pressed", flipped ? "true" : "false");
+      if (back) back.setAttribute("aria-hidden", flipped ? "false" : "true");
+    };
+
+    card.addEventListener("click", toggle);
+
+    // Accessibilité clavier (Entrée / Espace)
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
+});

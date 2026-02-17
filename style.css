@@ -660,57 +660,106 @@ h3{ margin: 0 0 10px; font-size: 18px; }
   color: rgba(255,255,255,.82);
 }
 
-/* ===== Légende échelle (1 → 7) ===== */
-.scale-legend{
-  margin-top: 14px;
-  padding: 12px 14px;
-  border: 1px solid var(--stroke);
-  background: rgba(255,255,255,.03);
-  border-radius: 14px;
-  max-width: 720px;
-}
-
-.scale-legend__title{
-  font-weight: 800;
-  font-size: 13px;
-  color: rgba(255,255,255,.88);
-  margin-bottom: 10px;
-}
-
-.scale-legend__grid{
+/* ===== ENTREPRISE : grille ===== */
+.work-grid{
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 16px;
 }
-
-.scale-legend__item{
-  display: flex;
-  gap: 10px;
-  align-items: baseline;
-  color: rgba(255,255,255,.78);
-  font-size: 12px;
-  line-height: 1.35;
-}
-
-.scale-legend__item b{
-  display: inline-flex;
-  min-width: 42px;
-  justify-content: center;
-  padding: 4px 8px;
-  border-radius: 999px;
-  border: 1px solid rgba(124,92,255,.35);
-  background: rgba(124,92,255,.12);
-  color: rgba(255,255,255,.92);
-  font-weight: 900;
-}
-
-/* Un peu plus dense sur mobile */
 @media (max-width: 920px){
-  .scale-legend{
-    width: 100%;
-    max-width: 520px;
-  }
-  .scale-legend__item b{
-    min-width: 38px;
-  }
+  .work-grid{ grid-template-columns: 1fr; }
+}
+
+/* ===== Flip Card (clic) ===== */
+.flip-card{
+  width: 100%;
+  display: block;
+  cursor: pointer;
+  perspective: 1100px;
+
+  /* reset button */
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  color: var(--text);
+  font: inherit;
+}
+
+/* IMPORTANT : hauteur stable */
+.flip-inner{
+  position: relative;
+  border-radius: var(--radius);
+  transform-style: preserve-3d;
+  transition: transform .55s ease;
+  box-shadow: var(--shadow);
+
+  height: 260px;           /* ✅ augmente si besoin (280/320) */
+}
+
+/* Faces */
+.flip-face{
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  border: 1px solid var(--stroke);
+  background: rgba(15, 20, 40, 0.82);
+  border-radius: var(--radius);
+  padding: 16px;
+
+  /* ✅ clé : layout vertical + contenu géré */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;        /* cache proprement, le scroll est dans .flip-back-content */
+}
+
+/* Recto */
+.flip-front{}
+
+/* Verso */
+.flip-back{
+  transform: rotateY(180deg);
+}
+
+/* Flip (au clic) */
+.flip-card.is-flipped .flip-inner{
+  transform: rotateY(180deg);
+}
+
+/* Scroll uniquement sur le contenu */
+.flip-back-content{
+  flex: 1;                 /* ✅ prend la place dispo */
+  overflow: auto;          /* ✅ scroll si trop long */
+  padding-right: 8px;
+}
+
+/* Hint collé en bas */
+.flip-hint{
+  margin-top: 10px;
+  font-size: 12px;
+  opacity: .75;
+}
+
+/* Scrollbar discrète */
+.flip-back-content::-webkit-scrollbar{ width: 8px; }
+.flip-back-content::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,.12);
+  border-radius: 10px;
+}
+
+/* Hover sans “bouger” la carte */
+.flip-card:hover .flip-face{
+  border-color: rgba(124,92,255,.45);
+  background: rgba(15, 20, 40, 0.88);
+}
+
+/* Focus clavier */
+.flip-card:focus-visible .flip-face{
+  outline: 2px solid rgba(124,92,255,.60);
+  outline-offset: 2px;
 }

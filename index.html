@@ -94,8 +94,6 @@
   </div>
 </section>
 
-
-    
     <!-- COMPETENCES -->
 <section class="panel" id="skills" data-panel="skills">
   <h2>Compétences</h2>
@@ -226,6 +224,195 @@
 
   </div>
 </section>
+
+
+<!-- ENTREPRISE -->
+<section class="panel" id="work" data-panel="work">
+  <h2>Entreprise</h2>
+
+  <p class="muted" style="margin-top:-6px;">
+    Format “flashcards” : une synthèse côté face, puis détails au clic.
+  </p>
+
+  <div class="work-grid">
+
+    <!-- Carte 1 -->
+    <button class="flip-card" type="button" aria-pressed="false">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <h3>Industrialisation des pipelines data</h3>
+          <p class="muted">
+            Mise en production de pipelines robustes, versionnés et maintenables (Git, Airflow, Terraform).
+          </p>
+          <span class="flip-hint">Clique pour voir le détail →</span>
+        </div>
+
+        <div class="flip-face flip-back" aria-hidden="true">
+          <h3>Détails</h3>
+          <div class="flip-back-content">
+            <ul class="list">
+              <li>Versioning Git : conventions, PR, traçabilité des changements.</li>
+              <li>Orchestration Airflow : DAGs, dépendances, monitoring, erreurs.</li>
+              <li>Déploiement Terraform : datasets/tables/vues/labels/accès en IaC.</li>
+              <li>Documentation + handover pour la reprise par l’équipe.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+              Impact : pipelines plus fiables, maintenance simplifiée, standardisation et réduction de la dette technique.
+            </p>
+          </div>
+          <span class="flip-hint">Clique pour revenir ←</span>
+        </div>
+      </div>
+    </button>
+
+    <!-- Carte 2 -->
+    <button class="flip-card" type="button" aria-pressed="false">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <h3>Migration vers une architecture data moderne</h3>
+          <p class="muted">
+            Contribution à la transformation “legacy → moderne” et à la standardisation des flux.
+          </p>
+          <span class="flip-hint">Clique pour voir le détail →</span>
+        </div>
+
+        <div class="flip-face flip-back" aria-hidden="true">
+          <h3>Détails</h3>
+          <div class="flip-back-content">
+            <ul class="list">
+              <li>Réduction des dépendances directes entre projets / équipes.</li>
+              <li>Centralisation des transformations et points d’accès standardisés.</li>
+              <li>Airflow pour l’orchestration + Terraform pour la gouvernance (accès, labels, ownership).</li>
+              <li>Objectif : architecture scalable, maintenable et gouvernée.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+              Impact : meilleure gouvernance, pipelines reproductibles, baisse de la dette technique.
+            </p>
+          </div>
+          <span class="flip-hint">Clique pour revenir ←</span>
+        </div>
+      </div>
+    </button>
+
+    <!-- Carte 3 -->
+    <button class="flip-card" type="button" aria-pressed="false">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <h3>Looker - Autonomie métier (TOPASE)</h3>
+          <p class="muted">
+            Exposition des données d’une application dans Looker pour réduire la dépendance à l’app métier.
+          </p>
+          <span class="flip-hint">Clique pour voir le détail →</span>
+        </div>
+
+        <div class="flip-face flip-back" aria-hidden="true">
+          <h3>Détails</h3>
+          <div class="flip-back-content">
+            <ul class="list">
+              <li>Structuration des datasets BigQuery pour l’analyse (vues, tables, cohérence).</li>
+              <li>Modélisation LookML : explors, champs, logique métier, réutilisation.</li>
+              <li>Focus : données fiables, compréhensibles et “self-service” côté métier.</li>
+              <li>Itérations avec les utilisateurs pour répondre aux besoins analytiques.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+              Impact : équipes métier plus autonomes, accès simplifié et usage BI renforcé.
+            </p>
+          </div>
+          <span class="flip-hint">Clique pour revenir ←</span>
+        </div>
+      </div>
+    </button>
+
+    <!-- Carte 4 -->
+    <button class="flip-card" type="button" aria-pressed="false">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <h3>Vues inter-projets & exposition applicative</h3>
+          <p class="muted">
+            Standardisation de vues consommées par des applications / BI dans un contexte multi-équipes.
+          </p>
+          <span class="flip-hint">Clique pour voir le détail →</span>
+        </div>
+
+        <div class="flip-face flip-back" aria-hidden="true">
+          <h3>Détails</h3>
+          <div class="flip-back-content">
+            <ul class="list">
+              <li>Analyse des flux existants (legacy / ordonnanceur) + identification de la source.</li>
+              <li>Migration vers Airflow si nécessaire, puis intégration dans nos projets.</li>
+              <li>Création/recettage des vues dans un espace dédié (ex. exposition).</li>
+              <li>Terraform : tables/vues, labels, tags, “main job”, dataset authorizations.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+              Impact : exposition standardisée, meilleure gouvernance, interopérabilité entre équipes.
+            </p>
+          </div>
+          <span class="flip-hint">Clique pour revenir ←</span>
+        </div>
+      </div>
+    </button>
+
+    <!-- Carte 5 -->
+    <button class="flip-card" type="button" aria-pressed="false">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <h3>Projet Supply Chain - Dernier Kilomètre</h3>
+          <p class="muted">
+            Contribution à la fiabilisation et mise à disposition d’indicateurs clés logistiques.
+          </p>
+          <span class="flip-hint">Clique pour voir le détail →</span>
+        </div>
+
+        <div class="flip-face flip-back" aria-hidden="true">
+          <h3>Détails</h3>
+          <div class="flip-back-content">
+            <ul class="list">
+              <li>Industrialisation des transformations et structuration des datasets analytiques.</li>
+              <li>Fiabilisation des flux : cohérence, contrôles, reproductibilité.</li>
+              <li>Intégration dans les pipelines existants (orchestration, standardisation).</li>
+              <li>Chaîne complète : Source → transformation → exposition → KPI.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+              Impact : meilleure visibilité sur la perf logistique, données plus fiables pour la décision.
+            </p>
+          </div>
+          <span class="flip-hint">Clique pour revenir ←</span>
+        </div>
+      </div>
+    </button>
+
+    <!-- Carte 6 -->
+    <button class="flip-card" type="button" aria-pressed="false">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <h3>Support & amélioration continue</h3>
+          <p class="muted">
+            Debug, optimisation, refactor : fiabiliser et améliorer les projets data existants.
+          </p>
+          <span class="flip-hint">Clique pour voir le détail →</span>
+        </div>
+
+        <div class="flip-face flip-back" aria-hidden="true">
+          <h3>Détails</h3>
+          <div class="flip-back-content">
+            <ul class="list">
+              <li>Analyse d’incidents data et corrections.</li>
+              <li>Optimisation BigQuery (coûts, partitions, perfs, bonnes pratiques).</li>
+              <li>Refactoring de pipelines et amélioration de la maintenabilité.</li>
+              <li>Support Data Analysts / métiers + documentation.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+              Impact : moins d’incidents, meilleure performance, projets plus propres et durables.
+            </p>
+          </div>
+          <span class="flip-hint">Clique pour revenir ←</span>
+        </div>
+      </div>
+    </button>
+
+  </div>
+</section>
+
 
 
     
