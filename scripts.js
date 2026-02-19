@@ -402,3 +402,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+document.querySelectorAll('[data-goto]').forEach(el => {
+  el.addEventListener("click", (e) => {
+    e.preventDefault();
+    const name = el.getAttribute("data-goto");
+    showPanel(name);
+    history.replaceState(null, "", `#${name}`);
+  });
+});

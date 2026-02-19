@@ -30,69 +30,119 @@
   </header>
 
   <main class="shell">
+
     <!-- ACCUEIL -->
-    <section class="panel is-visible" id="home" data-panel="home">
-  <div class="hero">
-    <div class="hero__text">
-      <h1>
-        Portfolio <span class="accent">Paul Bouqueniaux</span><br/>
-        Alternant - Analytics Engineer
+<section class="panel is-visible" id="home" data-panel="home">
+
+  <div class="home-hero">
+    <!-- Colonne gauche -->
+    <div class="home-left">
+      <h1 class="title">
+        Analytics Engineer<br>
+        <span class="accent">Industrialisation & Modélisation de la donnée</span>
       </h1>
 
-      <p class="lead">
-        Je construis des pipelines data (BigQuery, Git, Airflow/automatisation) et je transforme des données en KPIs utiles (Looker/Looker Studio).
+      <p class="subtitle">
+        Actuellement Analytics Engineer en alternance chez <strong>Auchan France (Supply Chain)</strong>,
+        je conçois et industrialise des pipelines data sur BigQuery, afin de transformer des données brutes
+        en jeux de données fiables, documentés et directement exploitables par les équipes métier et les outils BI.
       </p>
 
-      <div class="chips">
+      <p class="availability">
+        Je serai disponible à partir de <strong>septembre 2026</strong> et recherche un poste
+        pour des métiers accès autour des data, où je pourrai contribuer à la structuration,
+        la fiabilisation et la mise à disposition de la donnée à l’échelle d’une organisation.
+      </p>
+
+      <!-- Actions (discrètes) -->
+      <div class="home-actions">
+        <a class="action action--primary" href="#contact" data-goto="contact">
+          Me contacter
+        </a>
+        <a class="action" href="#work" data-goto="work">
+          Voir mes missions
+        </a>
+      </div>
+
+      <!-- Chips stack -->
+      <div class="chips" aria-label="Stack principale">
         <span class="chip">BigQuery</span>
         <span class="chip">SQL</span>
-        <span class="chip">Python</span>
         <span class="chip">Git</span>
+        <span class="chip">Airflow</span>
+        <span class="chip">Terraform</span>
         <span class="chip">Looker</span>
       </div>
     </div>
 
-    <div class="hero__card">
-      <div class="avatar">
-        <img src="assets/paul.jpg" alt="Photo de Paul">
-      </div>
+    <!-- Colonne droite -->
+    <div class="home-right">
+      <div class="profile-card">
+        <div class="avatar">
+          <img src="assets/paul.jpg" alt="Photo de Paul Bouqueniaux" loading="eager" decoding="async" />
+        </div>
 
-      <div class="mini">
-        <div class="mini__item">
-          <div class="mini__k">Focus</div>
-          <div class="mini__v">Supply Chain · Data</div>
-        </div>
-        <div class="mini__item">
-          <div class="mini__k">Stack</div>
-          <div class="mini__v">SQL · BQ · Git · BI</div>
-        </div>
-        <div class="mini__item">
-          <div class="mini__k">Objectif</div>
-          <div class="mini__v">Industrialiser & scaler</div>
+        <div class="mini">
+          <div class="mini__item">
+            <span class="mini__k">Focus</span>
+            <span class="mini__v">Supply Chain · Data</span>
+          </div>
+          <div class="mini__item">
+            <span class="mini__k">Stack</span>
+            <span class="mini__v">SQL · BQ · Git · BI</span>
+          </div>
+          <div class="mini__item">
+            <span class="mini__k">Objectif</span>
+            <span class="mini__v">Industrialiser & scaler</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="grid2">
+  <!-- Bas de home (2 cartes) -->
+  <div class="home-bottom">
     <div class="card">
       <h2>À propos</h2>
-      <p>
-        Étudiant MIASHS à Lille, en alternance en tant qu’Analytics Engineer. J’aime rendre la donnée fiable, documentée, testable,
-        et utile pour les décisions (dashboards, KPIs, gouvernance).
+      <p class="muted">
+        Étudiant MIASHS à Lille, en alternance en tant qu’Analytics Engineer.
+        J’aime rendre la donnée <b>fiable</b>, <b>traçable</b> et <b>consommable</b> (BI / applications),
+        dans des environnements multi-équipes.
       </p>
     </div>
 
     <div class="card">
-      <h2>Ce que tu verras ici</h2>
-      <ul class="list">
-        <li><b>Compétences</b> (tech & data)</li>
-        <li><b>Entreprise</b> : missions, apprentissages, méthodes</li>
-        <li><b>Parcours</b> : cours, notions, projets académiques</li>
+     <h2>Contenu du portfolio</h2>
+
+        <p class="muted">
+           Ce portfolio présente mon positionnement, mes compétences techniques et les projets
+           sur lesquels j’interviens en tant qu’Analytics Engineer.
+        </p>
+
+        <ul class="list">
+          <li>
+            <strong>Compétences</strong> :
+            visualisation synthétique de mes domaines d’expertise, incluant la modélisation analytique,
+            l’industrialisation des pipelines et l’exposition de la donnée.
+          </li>
+
+         <li>
+            <strong>Expérience en entreprise</strong> :
+            description détaillée des projets réalisés chez Auchan, incluant les choix techniques,
+            l’architecture et les objectifs métier.
+          </li>
+
+          <li>
+            <strong>Parcours</strong> :
+            formation, environnement technique et progression vers un rôle d’Analytics Engineer.
+            </li>
+        </ul>
       </ul>
     </div>
   </div>
+
 </section>
+
 
     <!-- COMPETENCES -->
 <section class="panel" id="skills" data-panel="skills">
