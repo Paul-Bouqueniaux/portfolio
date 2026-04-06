@@ -413,7 +413,6 @@ document.querySelectorAll('[data-goto]').forEach(el => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-
   const repoOwner = "paul-bouqueniaux";
   const repoName = "portfolio";
 
@@ -421,30 +420,9 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(response => response.json())
     .then(data => {
       const lastCommitDate = new Date(data[0].commit.committer.date);
-      const today = new Date();
-
-      const diffTime = Math.abs(today - lastCommitDate);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-      let message = "";
-
-      if (diffDays <= 7) {
-        message = `✅ Portfolio mis à jour récemment (${diffDays} jour(s)).`;
-      } else if (diffDays <= 30) {
-        message = `ℹ️ Dernière mise à jour il y a ${diffDays} jours.`;
-      } else {
-        message = `⚠️ Dernière mise à jour il y a ${diffDays} jours. Des améliorations sont peut-être en cours.`;
-      }
-
-      document.getElementById("updateMessage").innerText = message;
+      const diffDays = Math.ceil(Math.abs(new Date() - lastCommitDate) / (1000 * 60 * 60 * 24));
+      const el = document.getElementById("lastCommit");
+      if (el) el.textContent = `· Mis à jour il y a ${diffDays} jour(s)`;
     })
-    .catch(() => {
-      document.getElementById("updateMessage").innerText =
-        "Impossible de vérifier la dernière mise à jour.";
-    });
-
-  document.getElementById("closeUpdate").addEventListener("click", () => {
-    document.getElementById("updateModal").style.display = "none";
-  });
-
+    .catch(() => {});
 });

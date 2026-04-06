@@ -8,14 +8,6 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 
-<div id="updateModal" class="update-modal">
-  <div class="update-content">
-    <h3>État du portfolio</h3>
-    <p id="updateMessage">Vérification en cours...</p>
-    <button id="closeUpdate">Entrer sur le site</button>
-  </div>
-</div>
-
 <body>
   <!-- Fond animé -->
   <canvas id="bg"></canvas>
@@ -120,11 +112,11 @@
     </div>
 
     <div class="card">
-     <h2>Contenu du portfolio</h2>
+    <h2>Contenu du portfolio</h2>
 
         <p class="muted">
-           Ce portfolio présente mon positionnement, mes compétences techniques et les projets
-           sur lesquels j’interviens en tant qu’Analytics Engineer.
+        Ce portfolio présente mon positionnement, mes compétences techniques et les projets
+        sur lesquels j’interviens en tant qu’Analytics Engineer.
         </p>
 
         <ul class="list">
@@ -134,7 +126,7 @@
             l’industrialisation des pipelines et l’exposition de la donnée.
           </li>
 
-         <li>
+          <li>
             <strong>Expérience en entreprise</strong> :
             description détaillée des projets réalisés chez Auchan, incluant les choix techniques,
             l’architecture et les objectifs métier.
@@ -143,7 +135,7 @@
           <li>
             <strong>Parcours</strong> :
             formation, environnement technique et progression vers un rôle d’Analytics Engineer.
-            </li>
+          </li>
         </ul>
       </ul>
     </div>
@@ -468,6 +460,66 @@
       </div>
     </button>
 
+    <!-- Carte 7 — Formation Looker -->
+    <button class="flip-card" type="button" aria-pressed="false">
+    <div class="flip-inner">
+      <div class="flip-face flip-front">
+        <h3>Formation Looker - Montée en compétences équipes</h3>
+        <p class="muted">
+          Animation de sessions de formation à Looker pour accompagner les collaborateurs
+          dans la prise en main du rôle d'Explorer.
+        </p>
+        <span class="flip-hint">cliquez pour voir le détail →</span>
+      </div>
+
+      <div class="flip-face flip-back" aria-hidden="true">
+        <h3>Détails</h3>
+          <div class="flip-back-content">
+            <ul class="list">
+              <li>Animation de formations internes à destination des équipes métier.</li>
+              <li>Prise en main du rôle Explorer : navigation dans les Looks, construction de requêtes, filtres, exports.</li>
+              <li>Transmission des bonnes pratiques d'utilisation de Looker en autonomie.</li>
+              <li>Réduction de la dépendance aux équipes data pour les besoins analytiques courants.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+              Impact : équipes métier autonomes sur Looker, moins de sollicitations data, adoption BI renforcée.
+            </p>
+          </div>
+          <span class="flip-hint">cliquez pour revenir ←</span>
+        </div>
+      </div>
+    </button>
+
+    <!-- Carte 8 — Chatbot Logistar -->
+    <button class="flip-card" type="button" aria-pressed="false">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <h3>Chatbot métier - Autonomisation sur Logistar</h3>
+          <p class="muted">
+          Conception d'un chatbot interne pour réduire les sollicitations data
+          et autonomiser les utilisateurs sur l'outil Logistar.
+          </p>
+          <span class="flip-hint">cliquez pour voir le détail →</span>
+        </div>
+
+      <div class="flip-face flip-back" aria-hidden="true">
+        <h3>Détails</h3>
+          <div class="flip-back-content">
+            <ul class="list">
+              <li>Analyse des besoins récurrents des utilisateurs sur Logistar.</li>
+              <li>Conception et développement d'un chatbot métier pour répondre aux questions fréquentes.</li>
+              <li>Réduction des sollicitations internes grâce à un accès autonome à l'information.</li>
+              <li>Amélioration de l'expérience utilisateur sur un outil métier critique.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+            Impact : moins de sollicitations data, meilleure autonomie des équipes, adoption outil facilitée.
+            </p>
+          </div>
+          <span class="flip-hint">cliquez pour revenir ←</span>
+        </div>
+      </div>
+    </button>       
+
   </div>
 </section>
 
@@ -517,8 +569,8 @@
         <div class="step">
           <span>2019-2020</span>
           <p>
-           <b>Baccalauréat Scientifique option : Physique-Chimie</b><br/> 
-           Lycée Yves Kernanec - Marcq-en-Baroeul<br/>
+          <b>Baccalauréat Scientifique option : Physique-Chimie</b><br/> 
+          Lycée Yves Kernanec - Marcq-en-Baroeul<br/>
           </p>
         </div>
 
@@ -540,6 +592,7 @@
         <li>Industrialisation : <b>Git</b>, conventions, versioning, documentation</li>
         <li>Orchestration & automatisation : <b>jobs</b>, migration ordonnanceur → <b>Airflow</b></li>
         <li>Mise à disposition de <b>KPIs fiables</b> pour la BI (Looker / Looker Studio)</li>
+        <li>Animation de <b>formations Looker</b> : accompagnement des équipes métier sur le rôle d'Explorer</li>
       </ul>
 
       <div class="tags" style="margin-top:12px;">
@@ -621,17 +674,29 @@
     <!-- CONTACT -->
     <section class="panel" id="contact" data-panel="contact">
 
-      <div class="card">
-        <h2>Contact</h2>
+    <div class="card">
+      <h2>Contact</h2>
         <div class="contact">
           <a class="contact__item" href="mailto:paul.bouqueniaux@laposte.net">📩 paul.bouqueniaux@laposte.net</a>
           <a class="contact__item" href="#" target="_blank" rel="noreferrer">🔗 LinkedIn (à ajouter)</a>
         </div>
       </div>
 
-      <footer class="footer">
-        <span>© <span id="year"></span> Paul Bouqueniaux</span> 
-      </footer>
+      <div class="card" style="margin-top: 14px;">
+        <h3 style="margin: 0 0 6px;">Référence alternance</h3>
+        <p class="muted" style="margin: 0 0 10px; font-size: 13px;">
+        Mon tuteur d'alternance chez Auchan France peut être contacté pour toute question relative à mon expérience.
+        </p>
+      <div class="contact">
+      <a class="contact__item" href="mailto:MAIL_TUTEUR_ICI">📩 Aurélien Gosset : agosset@auchan.fr</a>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Paul Bouqueniaux</span>
+      <span id="lastCommit" style="margin-left: 12px; font-size: 12px; opacity: 0.55;"></span>
+    </footer>
+
     </section>
   </main>
 
