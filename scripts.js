@@ -57,68 +57,75 @@ if (year) year.textContent = new Date().getFullYear();
 ------------------------- */
 const canvas = document.getElementById("bg");
 const ctx = canvas?.getContext("2d");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-if (!canvas || !ctx) {
-  console.warn("Canvas #bg introuvable → fond animé désactivé");
-} else {
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener("resize", resize);
-  resize();
+if (reducedMotion && canvas) {
+  canvas.style.display = "none";
+}
 
-  const N = Math.min(120, Math.floor((window.innerWidth * window.innerHeight) / 18000));
-  const pts = Array.from({ length: N }, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    vx: (Math.random() - 0.5) * 0.35,
-    vy: (Math.random() - 0.5) * 0.35,
-    r: 1 + Math.random() * 1.5
-  }));
+if (!reducedMotion) {
+  if (!canvas || !ctx) {
+    console.warn("Canvas #bg introuvable → fond animé désactivé");
+  } else {
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
 
-  function step() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const N = Math.min(120, Math.floor((window.innerWidth * window.innerHeight) / 18000));
+    const pts = Array.from({ length: N }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: 1 + Math.random() * 1.5
+    }));
 
-    const grd = ctx.createRadialGradient(
-      canvas.width * 0.25, canvas.height * 0.15, 20,
-      canvas.width * 0.25, canvas.height * 0.15, canvas.width * 0.7
-    );
-    grd.addColorStop(0, "rgba(124,92,255,0.18)");
-    grd.addColorStop(1, "rgba(0,0,0,0)");
-    ctx.fillStyle = grd;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    function step() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    for (let i = 0; i < pts.length; i++) {
-      const a = pts[i];
-      a.x += a.vx; a.y += a.vy;
-      if (a.x < 0 || a.x > canvas.width) a.vx *= -1;
-      if (a.y < 0 || a.y > canvas.height) a.vy *= -1;
+      const grd = ctx.createRadialGradient(
+        canvas.width * 0.25, canvas.height * 0.15, 20,
+        canvas.width * 0.25, canvas.height * 0.15, canvas.width * 0.7
+      );
+      grd.addColorStop(0, "rgba(124,92,255,0.18)");
+      grd.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.beginPath();
-      ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(255,255,255,0.50)";
-      ctx.fill();
+      for (let i = 0; i < pts.length; i++) {
+        const a = pts[i];
+        a.x += a.vx; a.y += a.vy;
+        if (a.x < 0 || a.x > canvas.width) a.vx *= -1;
+        if (a.y < 0 || a.y > canvas.height) a.vy *= -1;
 
-      for (let j = i + 1; j < pts.length; j++) {
-        const b = pts[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const d2 = dx * dx + dy * dy;
-        if (d2 < 140 * 140) {
-          const alpha = 1 - (Math.sqrt(d2) / 140);
-          ctx.strokeStyle = `rgba(124,92,255,${alpha * 0.22})`;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,255,255,0.50)";
+        ctx.fill();
+
+        for (let j = i + 1; j < pts.length; j++) {
+          const b = pts[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < 140 * 140) {
+            const alpha = 1 - (Math.sqrt(d2) / 140);
+            ctx.strokeStyle = `rgba(124,92,255,${alpha * 0.22})`;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
         }
       }
-    }
 
-    requestAnimationFrame(step);
+      requestAnimationFrame(step);
+    }
+    step();
   }
-  step();
-}
+} // ← fermeture du if (!reducedMotion)
 
 /* =========================
    RADAR SKILLS (SVG) — ÉCHELLE 7
@@ -425,4 +432,51 @@ document.addEventListener("DOMContentLoaded", () => {
       if (el) el.textContent = `· Mis à jour il y a ${diffDays} jour(s)`;
     })
     .catch(() => {});
+});
+
+/* -------------------------
+MAILTO : feedback "Copié !"
+------------------------- */
+document.querySelectorAll('.contact__item[href^="mailto:"]').forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const email = link.getAttribute("href").replace("mailto:", "");
+    navigator.clipboard.writeText(email).catch(() => {});
+
+    const original = link.innerHTML;
+    link.innerHTML = "✅ Adresse copiée !";
+    link.style.borderColor = "rgba(45,212,191,.55)";
+    link.style.background = "rgba(45,212,191,.08)";
+
+    setTimeout(() => {
+      link.innerHTML = original;
+      link.style.borderColor = "";
+      link.style.background = "";
+      window.location.href = `mailto:${email}`;
+    }, 1500);
+  });
+});
+
+/* -------------------------
+SCROLL TO TOP
+------------------------- */
+const scrollBtn = document.getElementById("scrollTop");
+
+window.addEventListener("scroll", () => {
+  scrollBtn?.classList.toggle("is-visible", window.scrollY > 300);
+});
+
+scrollBtn?.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+/* -------------------------
+CHIPS ACCUEIL → COMPÉTENCES
+------------------------- */
+document.querySelectorAll(".chips .chip").forEach(chip => {
+  chip.style.cursor = "pointer";
+  chip.addEventListener("click", () => {
+    showPanel("skills");
+    history.replaceState(null, "", "#skills");
+  });
 });

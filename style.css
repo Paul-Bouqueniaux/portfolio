@@ -672,22 +672,15 @@ h3{ margin: 0 0 10px; font-size: 18px; }
   display: grid;
   grid-template-columns: repeat(3, minmax(0,1fr));
   gap: 16px;
-}
-@media (max-width: 1100px){
-  .work-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-}
-@media (max-width: 920px){
-  .work-grid{ grid-template-columns: 1fr; }
+  align-items: stretch; /* ← toutes les cartes d'une ligne = même hauteur */
 }
 
-/* ===== Flip Card (clic) ===== */
 .flip-card{
   width: 100%;
-  display: block;
+  height: 100%; /* ← prend toute la hauteur de la cellule grille */
+  display: flex;
   cursor: pointer;
   perspective: 1100px;
-
-  /* reset button */
   appearance: none;
   -webkit-appearance: none;
   border: 0;
@@ -699,80 +692,74 @@ h3{ margin: 0 0 10px; font-size: 18px; }
   font: inherit;
 }
 
-/* IMPORTANT : hauteur stable */
 .flip-inner{
   position: relative;
+  width: 100%;
   border-radius: var(--radius);
   transform-style: preserve-3d;
   transition: transform .55s ease;
   box-shadow: var(--shadow);
-
-  height: 260px;           /* ✅ augmente si besoin (280/320) */
+  min-height: 220px; /* ← hauteur minimum raisonnable */
 }
 
-/* Faces */
 .flip-face{
   position: absolute;
   inset: 0;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-
   border: 1px solid var(--stroke);
   background: rgba(15, 20, 40, 0.82);
   border-radius: var(--radius);
   padding: 16px;
-
-  /* ✅ clé : layout vertical + contenu géré */
   display: flex;
   flex-direction: column;
-  overflow: hidden;        /* cache proprement, le scroll est dans .flip-back-content */
+  overflow: hidden;
 }
 
-/* Recto */
-.flip-front{}
-
-/* Verso */
 .flip-back{
   transform: rotateY(180deg);
 }
 
-/* Flip (au clic) */
 .flip-card.is-flipped .flip-inner{
   transform: rotateY(180deg);
 }
 
-/* Scroll uniquement sur le contenu */
 .flip-back-content{
-  flex: 1;                 /* ✅ prend la place dispo */
-  overflow: auto;          /* ✅ scroll si trop long */
+  flex: 1;
+  overflow: auto;
   padding-right: 8px;
 }
 
-/* Hint collé en bas */
 .flip-hint{
-  margin-top: 10px;
+  margin-top: auto; /* ← colle le hint en bas */
+  padding-top: 10px;
   font-size: 12px;
   opacity: .75;
 }
 
-/* Scrollbar discrète */
 .flip-back-content::-webkit-scrollbar{ width: 8px; }
 .flip-back-content::-webkit-scrollbar-thumb{
   background: rgba(255,255,255,.12);
   border-radius: 10px;
 }
 
-/* Hover sans “bouger” la carte */
 .flip-card:hover .flip-face{
   border-color: rgba(124,92,255,.45);
   background: rgba(15, 20, 40, 0.88);
 }
 
-/* Focus clavier */
 .flip-card:focus-visible .flip-face{
   outline: 2px solid rgba(124,92,255,.60);
   outline-offset: 2px;
 }
+
+@media (max-width: 1100px){
+  .work-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 920px){
+  .work-grid{ grid-template-columns: 1fr; }
+}
+
 
 /* =========================
    HOME (ACCUEIL)
@@ -1067,4 +1054,45 @@ h3{ margin: 0 0 10px; font-size: 18px; }
   background: linear-gradient(90deg,#6a5cff,#00c6ff);
   color: white;
   cursor: pointer;
+}
+
+/* ===== SCROLL TO TOP ===== */
+#scrollTop {
+  position: fixed;
+  bottom: 28px;
+  right: 22px;
+  z-index: 100;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid var(--stroke);
+  background: rgba(124,92,255,.18);
+  color: var(--text);
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .25s ease, transform .25s ease, background .2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#scrollTop.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#scrollTop:hover {
+  background: rgba(124,92,255,.35);
+}
+
+.chip {
+  transition: background .15s ease, border-color .15s ease, transform .1s ease;
+}
+
+.chip:hover {
+  background: rgba(124,92,255,.18);
+  border-color: rgba(124,92,255,.55);
+  transform: translateY(-1px);
 }
