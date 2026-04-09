@@ -318,15 +318,15 @@
         <div class="flip-face flip-back" aria-hidden="true">
           <h3>Détails</h3>
           <div class="flip-back-content">
-            <ul class="list">
-              <li>Versioning Git : conventions, PR, traçabilité des changements.</li>
-              <li>Orchestration Airflow : DAGs, dépendances, monitoring, erreurs.</li>
-              <li>Déploiement Terraform : datasets/tables/vues/labels/gestion des accès (IAM) versionnée.</li>
-              <li>Documentation + handover pour la reprise par l’équipe.</li>
-            </ul>
-            <p class="muted" style="margin-top:10px;">
-            Impact : migration de <b>plus de 800 tables, vues et datasets</b> sur l'ensemble des projets Supply Chain, pipelines plus fiables, dette technique réduite.
-            </p>
+          <ul class="list">
+            <li>Migration de <b>293 alimentations de données</b> : transformation des requêtes programmées BigQuery en scripts Shell, associés à des DAGs YAML Airflow et versionnés sur GitLab.</li>
+            <li>Objectif : sortir des dépendances nominatives (requêtes programmées rattachées à une personne) pour passer sur des comptes de service partagés - continuité assurée même en cas d'absence ou de départ.</li>
+            <li>Passage sous <b>Terraform de 800 tables, vues et datasets</b> Supply Chain pour garantir le data ownership collectif et la gouvernance à l'échelle de l'équipe.</li>
+            <li>Documentation + handover pour la reprise par l'équipe.</li>
+          </ul>
+          <p class="muted" style="margin-top:10px;">
+            Impact : <b>293 alimentations migrées</b> vers une architecture Shell/Airflow/GitLab, <b>800 ressources BigQuery sous Terraform</b>, zéro dépendance nominative, pérennité des projets assurée.
+          </p>
           </div>
           <span class="flip-hint">cliquez pour revenir ←</span>
         </div>
