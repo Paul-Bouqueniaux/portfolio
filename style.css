@@ -945,9 +945,12 @@ h3{ margin: 0 0 10px; font-size: 18px; }
   box-shadow: var(--shadow);
 }
 
+
+/*section home */
+
 .avatar{
   width: 160px;
-  height: 190px;              /* ✅ plus haut que large */
+  height: 190px;
   margin: 0 auto 12px;
 
   border-radius: 16px;
@@ -963,10 +966,9 @@ h3{ margin: 0 0 10px; font-size: 18px; }
   width: 100%;
   height: 100%;
 
-  object-fit: cover;          /* ✅ remplit */
-  object-position: center 8%; /* ✅ remonte vers les cheveux */
+  object-fit: cover;
+  object-position: center 8%;
 
-  transform: none;            /* ✅ pas de scale */
   display: block;
 }
 
