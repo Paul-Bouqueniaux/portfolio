@@ -325,10 +325,12 @@
             <li>Migration de <b>293 alimentations de données</b> : transformation des requêtes programmées BigQuery en scripts Shell, associés à des DAGs YAML Airflow et versionnés sur GitLab.</li>
             <li>Objectif : sortir des dépendances nominatives (requêtes programmées rattachées à une personne) pour passer sur des comptes de service partagés - continuité assurée même en cas d'absence ou de départ.</li>
             <li>Passage sous <b>Terraform de 800 tables, vues et datasets</b> Supply Chain pour garantir le data ownership collectif et la gouvernance à l'échelle de l'équipe.</li>
+            <li>Terraformisation prioritaire des scripts alimentant le <b>TNL (Taux de Non Livraison)</b>, indicateur suivi à l'échelle de l'entreprise : marge d'erreur nulle, validation systématique en environnement de qualification avant bascule en production.</li>
+            <li>Chantier mené dans le respect de l'échéance fixée par les Tech Leads au <b>31 mars</b>, date à partir de laquelle Terraform est devenu la norme obligatoire de gestion de l'infrastructure data chez Auchan, avec démantèlement complet de l'ancien ordonnanceur TWS sur le périmètre.</li>
             <li>Documentation + handover pour la reprise par l'équipe.</li>
           </ul>
           <p class="muted" style="margin-top:10px;">
-            Impact : <b>293 alimentations migrées</b> vers une architecture Shell/Airflow/GitLab, <b>800 ressources BigQuery sous Terraform</b>, zéro dépendance nominative, pérennité des projets assurée.
+            Impact : <b>293 alimentations migrées</b> vers une architecture Shell/Airflow/GitLab, <b>800 ressources BigQuery sous Terraform</b>, un indicateur critique sécurisé, zéro dépendance nominative, pérennité des projets assurée.
           </p>
           </div>
           <span class="flip-hint">cliquez pour revenir ←</span>
@@ -497,9 +499,9 @@
         <h3>Détails</h3>
           <div class="flip-back-content">
             <ul class="list">
-              <li>Animation de formations internes à destination des équipes métier.</li>
+              <li>Animation de <b>trois sessions</b> de formation au rôle Explorer de Looker, pour des profils métiers variés : approvisionneurs, demand planners, chefs de projets et managers.</li>
               <li>Prise en main du rôle Explorer : navigation dans les Looks, construction de requêtes, filtres, exports.</li>
-              <li>Transmission des bonnes pratiques d'utilisation de Looker en autonomie.</li>
+              <li>Formations combinant apports théoriques et exercices pratiques sur des cas réels, avec supports dédiés.</li>
               <li>Réduction de la dépendance aux équipes data pour les besoins analytiques courants.</li>
             </ul>
             <p class="muted" style="margin-top:10px;">
@@ -511,14 +513,14 @@
       </div>
     </button>
 
-    <!-- Carte 8 — Chatbot Logistar -->
+    <!-- Carte 8 — Référent IA : assistants conversationnels GEN IA -->
     <button class="flip-card" type="button" aria-pressed="false">
       <div class="flip-inner">
         <div class="flip-face flip-front">
-          <h3>Chatbot métier - Autonomisation sur Logistar</h3>
+          <h3>Référent IA — 5 assistants conversationnels internes (GEN IA)</h3>
           <p class="muted">
-          Conception d'un chatbot interne pour réduire les sollicitations data
-          et autonomiser les utilisateurs sur l'outil Logistar.
+          Conception et industrialisation de chatbots RAG sur GEN IA, la plateforme IA interne
+          d'Auchan (Claude, Gemini, ChatGPT), pour autonomiser les équipes métier.
           </p>
           <span class="flip-hint">cliquez pour voir le détail →</span>
         </div>
@@ -527,19 +529,169 @@
         <h3>Détails</h3>
           <div class="flip-back-content">
             <ul class="list">
-              <li>Analyse des besoins récurrents des utilisateurs sur Logistar.</li>
-              <li>Conception et développement d'un chatbot métier pour répondre aux questions fréquentes.</li>
-              <li>Réduction des sollicitations internes grâce à un accès autonome à l'information.</li>
-              <li>Amélioration de l'expérience utilisateur sur un outil métier critique.</li>
+              <li><b>Chatbot Logistar</b> : restructuration de 72 fiches réflexes (Markdown, PDF, Google Sheet, Google Docs) pour répondre presque instantanément aux questions des approvisionneurs.</li>
+              <li><b>Chatbot Export</b> : transformation de modes opératoires (MODOP) volumineux et dispersés par pays/flux en assistant fiable, sourcé et à jour — architecture hybride prompt directeur + playbooks + matrice d'incidents.</li>
+              <li><b>Assistant Gestes Appro Hypermarché</b> : méthode répliquée pour les gestionnaires d'approvisionnement, managers commerce et réceptionnaires en magasin (9 gestes quotidiens, outils GCM/TC57/OOSH/RIL/Smartway).</li>
+              <li><b>Chatbot documentation éditeur Logistar</b> : interroge l'ensemble des releases de l'éditeur pour retrouver la règle de gestion ou la fonctionnalité la plus à jour sur un sujet donné.</li>
+              <li><b>Chatbot Topase</b> : cinquième assistant déployé sur ce même périmètre outil.</li>
+              <li>Outillage personnel : scripts Python (API Google Drive) développés pour automatiser la mise à jour des bases documentaires des assistants.</li>
             </ul>
             <p class="muted" style="margin-top:10px;">
-            Impact : moins de sollicitations data, meilleure autonomie des équipes, adoption outil facilitée.
+            Impact : <b>5 assistants</b> conçus et déployés en production, méthode reproductible (prompt directeur + playbooks + matrice d'incidents), moins de sollicitations data, meilleure autonomie des équipes.
             </p>
           </div>
           <span class="flip-hint">cliquez pour revenir ←</span>
         </div>
       </div>
-    </button>       
+    </button>
+
+    <!-- Carte 9 — Projet Commandabilité -->
+    <button class="flip-card" type="button" aria-pressed="false">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <h3>De la formation au produit : projet Looker « Commandabilité »</h3>
+          <p class="muted">
+          Un nouveau projet Looker né directement d'un besoin exprimé lors des formations métier.
+          </p>
+          <span class="flip-hint">cliquez pour voir le détail →</span>
+        </div>
+
+        <div class="flip-face flip-back" aria-hidden="true">
+          <h3>Détails</h3>
+          <div class="flip-back-content">
+            <ul class="list">
+              <li>Les sessions de formation Looker ont révélé une frustration récurrente : un rapport Looker Studio figé sur la « commandabilité » (capacité à passer commande dans de bonnes conditions), non personnalisable.</li>
+              <li>Conception et développement d'un nouveau projet Looker en accès Explorer, laissant les métiers construire leurs propres analyses.</li>
+              <li>Enrichissement du référentiel avec des données supplémentaires identifiées lors des échanges, au-delà de l'existant.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+            Impact : boucle formation → besoin métier → livrable concret ; référentiel plus riche et mieux aligné sur l'usage réel.
+            </p>
+          </div>
+          <span class="flip-hint">cliquez pour revenir ←</span>
+        </div>
+      </div>
+    </button>
+
+    <!-- Carte 10 — Documentation d'onboarding -->
+    <button class="flip-card" type="button" aria-pressed="false">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <h3>Documentation d'onboarding Analytics Engineer (MkDocs)</h3>
+          <p class="muted">
+          Structuration de la connaissance technique de l'équipe pour préparer la transmission
+          aux futurs Analytics Engineers.
+          </p>
+          <span class="flip-hint">cliquez pour voir le détail →</span>
+        </div>
+
+        <div class="flip-face flip-back" aria-hidden="true">
+          <h3>Détails</h3>
+          <div class="flip-back-content">
+            <ul class="list">
+              <li>Constat : connaissance technique (environnement de dev, Terraform, Airflow, Looker) dispersée dans des documents Word/PowerPoint, sans navigation ni mise à jour centralisée.</li>
+              <li>Conception d'un site de documentation avec MkDocs, généré à partir de fichiers Markdown versionnés sur GitLab au même titre que le code de l'équipe.</li>
+              <li>Construction par vagues successives : structure générale, puis Terraform/Airflow, puis Looker.</li>
+              <li>Une vingtaine de pages organisées en huit sections, plus de 70 captures d'écran, procédures pas-à-pas complètes.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+            Impact : centralise l'ensemble du travail de deux années d'alternance (Terraform, Airflow, Shell, Looker, GitLab, usage de l'IA) pour accélérer l'intégration des futurs arrivants.
+            </p>
+          </div>
+          <span class="flip-hint">cliquez pour revenir ←</span>
+        </div>
+      </div>
+    </button>
+
+    <!-- Carte 11 — Audit et préparation migration Google → Microsoft -->
+    <button class="flip-card" type="button" aria-pressed="false">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <h3>Anticipation : audit de migration Google Workspace → Microsoft</h3>
+          <p class="muted">
+          Outillage d'audit automatisé à l'échelle du service Supply Chain, en amont d'une bascule
+          technologique majeure pour l'entreprise.
+          </p>
+          <span class="flip-hint">cliquez pour voir le détail →</span>
+        </div>
+
+        <div class="flip-face flip-back" aria-hidden="true">
+          <h3>Détails</h3>
+          <div class="flip-back-content">
+            <ul class="list">
+              <li>Conception de scripts Google Apps Script déployés à l'échelle de l'ensemble du service Supply Chain.</li>
+              <li>Identification automatique, pour chaque collaborateur, des fichiers Google Drive lui appartenant, avec arbitrage de conservation.</li>
+              <li>Attribution d'un niveau de complexité de migration selon les dépendances entre fichiers.</li>
+              <li>Tableau de bord de suivi de l'inventaire, pour piloter la bascule vers OneDrive.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+            Impact : <b>22 collaborateurs</b> et <b>plus de 11 500 fichiers</b> recensés, bases posées pour une migration maîtrisée vers l'environnement Microsoft.
+            </p>
+          </div>
+          <span class="flip-hint">cliquez pour revenir ←</span>
+        </div>
+      </div>
+    </button>
+
+    <!-- Carte 12 — Portail de centralisation Data Supply -->
+    <button class="flip-card" type="button" aria-pressed="false">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <h3>Centralisation Data Supply — Portail de documentation</h3>
+          <p class="muted">
+          Conception et déploiement d'un site de documentation interne centralisant les rapports
+          Looker Studio et la cartographie des process de l'équipe Supply Chain.
+          </p>
+          <span class="flip-hint">cliquez pour voir le détail →</span>
+        </div>
+
+        <div class="flip-face flip-back" aria-hidden="true">
+          <h3>Détails</h3>
+          <div class="flip-back-content">
+            <ul class="list">
+              <li>Construction d'un site <b>MkDocs</b> (Python, uv, pipeline GitLab CI/CD) déployé sur GitLab Pages, en remplacement d'un outil interne existant tombé en panne.</li>
+              <li>Bibliothèque de rapports officiels : extraction et structuration depuis le Google Sheet de gouvernance de l'équipe (périmètre, stream, leader, priorité), avec recherche par mot-clé en direct.</li>
+              <li>Cartographie des process Supply reconstruite depuis un schéma draw.io : grille CSS et connecteurs générés dynamiquement en JavaScript (SVG) pour un rendu fidèle et responsive.</li>
+              <li>Travail collaboratif en Git avec un collègue de l'équipe : gestion des conflits de fusion, itérations de design sur retours utilisateurs.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+            Impact : <b>80 rapports officiels centralisés</b>, remplacement d'un outil cassé, gain de temps pour toute l'équipe dans la recherche de dashboards, site versionné et maintenable en autonomie.
+            </p>
+          </div>
+          <span class="flip-hint">cliquez pour revenir ←</span>
+        </div>
+      </div>
+    </button>
+
+    <!-- Carte 13 — Monitoring qualité data (en cours) -->
+    <button class="flip-card" type="button" aria-pressed="false">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <h3>Monitoring qualité data — Freshness &amp; Completeness <span class="tag" style="margin-left:6px;">en cours</span></h3>
+          <p class="muted">
+          Conception d'un référentiel de monitoring de la qualité des données (fraîcheur, volumétrie,
+          doublons) pour détecter les anomalies avant qu'elles n'atteignent les tableaux de bord métier.
+          </p>
+          <span class="flip-hint">cliquez pour voir le détail →</span>
+        </div>
+
+        <div class="flip-face flip-back" aria-hidden="true">
+          <h3>Détails</h3>
+          <div class="flip-back-content">
+            <ul class="list">
+              <li>Étude comparative des mécanismes de détection disponibles sur la plateforme (seuils fixes vs modèles prédictifs Prophet), appliquée aux cinq types de contrôles existants (fraîcheur, volumétrie, distribution, unicité, métriques custom).</li>
+              <li>Conception d'un support de formation avec cas d'usage réels et matrice de décision, pour que chaque Analytics Engineer choisisse la bonne configuration selon son besoin (protection maximale vs contrôle technique léger).</li>
+              <li>Validation du support avec l'équipe avant intégration à la documentation d'onboarding (MkDocs).</li>
+              <li>Prochaine étape : déploiement progressif des contrôles sur les tables Supply Chain critiques et suivi de la réduction des incidents détectés tardivement.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+            Objectif visé : détection proactive des crashs, pertes de volume et doublons avant impact sur les KPI, et autonomie de l'équipe sur le choix et la configuration des monitors.
+            </p>
+          </div>
+          <span class="flip-hint">cliquez pour revenir ←</span>
+        </div>
+      </div>
+    </button>
 
   </div>
 </section>
@@ -603,18 +755,39 @@
     </div>
 
     <div class="stack">
-    <!-- Poste en alternance -->
+    <!-- Expérience professionnelle : alternance + CDD -->
     <div class="card">
-      <h3>Poste en alternance</h3>
+      <h3>Expérience professionnelle</h3>
       <p class="muted">Analytics Engineer — Supply Chain (Auchan France)</p>
+
+      <div class="subexp__title">
+        <b>Analytics Engineer · Alternance</b>
+        <p>08/2024 - 08/2026</p>
+      </div>
 
       <ul class="list">
         <li>Construction et maintenance de <b>pipelines de données</b> (BigQuery, SQL)</li>
         <li>Industrialisation : <b>Git</b>, conventions, versioning, documentation</li>
         <li>Orchestration & automatisation : <b>jobs</b>, migration ordonnanceur → <b>Airflow</b></li>
+        <li>Généralisation de <b>Terraform</b> sur l'ensemble du périmètre (800 ressources), sécurisation d'un indicateur critique (TNL)</li>
         <li>Mise à disposition de <b>KPIs fiables</b> pour la BI (Looker / Looker Studio)</li>
         <li>Animation de <b>formations Looker</b> : accompagnement des équipes métier sur le rôle d'Explorer</li>
+        <li><b>Référent IA</b> : conception de 5 assistants conversationnels internes (GEN IA) et documentation d'onboarding de l'équipe</li>
       </ul>
+
+      <!-- CDD, dans la continuité directe de l'alternance -->
+      <div class="subexp">
+        <div class="subexp__title">
+          <b>Analytics Engineer · CDD</b> · Auchan France - Supply Chain
+          <p>09/2026 - 11/2026</p>
+        </div>
+
+        <ul class="list subexp__list">
+          <li>Poursuite de l'accompagnement de l'équipe, dans la continuité directe des missions de l'alternance</li>
+          <li>Pilotage opérationnel de la <b>migration Google Workspace → Microsoft</b> (BigQuery conservé, bascule des rapports Looker Studio vers Power BI)</li>
+          <li>Mise en place des outils nécessaires à la bascule, à partir de l'audit d'inventaire réalisé en amont (22 collaborateurs, 11 500+ fichiers recensés)</li>
+        </ul>
+      </div>
 
       <div class="tags" style="margin-top:12px;">
         <span class="tag">BigQuery</span>
@@ -626,7 +799,7 @@
         <span class="tag">Shell</span>
         <span class="tag">LookML</span>
         <span class="tag">BI</span>
-        <span class="tag">IA</span>
+        <span class="tag">IA générative / RAG</span>
       </div>
     </div>
 
@@ -709,6 +882,7 @@
       <h3 style="margin: 0 0 8px;">Référent IA - Auchan Supply Chain</h3>
       <ul class="list">
         <li>Référent IA au sein de l'équipe, sur un sujet en forte croissance</li>
+        <li>Conception et industrialisation de <b>5 assistants conversationnels internes</b> (GEN IA) pour différents périmètres métier</li>
         <li>Accompagnement des collaborateurs sur la prise en main des outils IA</li>
         <li>Construction de prompts efficaces et de chatbots adaptés aux besoins métier</li>
         <li>Montée en charge : de plus en plus sollicité pour porter des sujets IA dans l'entreprise</li>
@@ -732,9 +906,9 @@
       </div>
 
       <div class="card" style="margin-top: 14px;">
-        <h3 style="margin: 0 0 6px;">Référence alternance</h3>
+        <h3 style="margin: 0 0 6px;">Référence professionnelle</h3>
         <p class="muted" style="margin: 0 0 10px; font-size: 13px;">
-        Mon tuteur d'alternance chez Auchan France peut être contacté pour toute question relative à mon expérience.
+        Mon manager chez Auchan France peut être contacté pour toute question relative à mon expérience (alternance puis CDD).
         </p>
       <div class="contact">
       <a class="contact__item" href="mailto:agosset@auchan.fr">📩 Aurélien Gosset : agosset@auchan.fr</a>
