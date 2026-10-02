@@ -385,28 +385,90 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* =========================
-   ENTREPRISE : FLIP CARDS (clic)
+   ENTREPRISE : CARTES EN POP-UP (clic)
 ========================= */
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".flip-card").forEach((card) => {
-    const inner = card.querySelector(".flip-inner");
-    const back = card.querySelector(".flip-back");
+  const cards = Array.from(document.querySelectorAll(".work-grid .flip-card"));
+  if (!cards.length) return;
 
-    const toggle = () => {
-      const flipped = card.classList.toggle("is-flipped");
-      card.setAttribute("aria-pressed", flipped ? "true" : "false");
-      if (back) back.setAttribute("aria-hidden", flipped ? "false" : "true");
-    };
+  const modal = document.createElement("div");
+  modal.className = "work-modal";
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.setAttribute("aria-labelledby", "workModalTitle");
+  modal.hidden = true;
+  modal.innerHTML = `
+    <div class="work-modal__dialog">
+      <header class="work-modal__head">
+        <span class="work-modal__count"></span>
+        <div class="work-modal__actions">
+          <button type="button" class="work-modal__btn" data-act="prev" aria-label="Carte précédente">← Précédente</button>
+          <button type="button" class="work-modal__btn" data-act="next" aria-label="Carte suivante">Suivante →</button>
+          <button type="button" class="work-modal__btn work-modal__close" data-act="close" aria-label="Réduire">Réduire ✕</button>
+        </div>
+      </header>
+      <div class="work-modal__body">
+        <h3 id="workModalTitle" class="work-modal__title"></h3>
+        <p class="muted work-modal__lead"></p>
+        <div class="work-modal__content"></div>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
 
-    card.addEventListener("click", toggle);
+  const titleEl = modal.querySelector(".work-modal__title");
+  const leadEl = modal.querySelector(".work-modal__lead");
+  const contentEl = modal.querySelector(".work-modal__content");
+  const countEl = modal.querySelector(".work-modal__count");
+  const bodyEl = modal.querySelector(".work-modal__body");
+  let current = 0;
+  let lastFocus = null;
 
-    // Accessibilité clavier (Entrée / Espace)
-    card.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        toggle();
-      }
-    });
+  const render = (i) => {
+    current = (i + cards.length) % cards.length;
+    const card = cards[current];
+    titleEl.textContent = card.querySelector(".flip-front h3")?.textContent || "";
+    leadEl.textContent = card.querySelector(".flip-front p")?.textContent.trim() || "";
+    const details = card.querySelector(".flip-back-content");
+    contentEl.innerHTML = details ? details.innerHTML : "";
+    countEl.textContent = `${current + 1} / ${cards.length}`;
+    bodyEl.scrollTop = 0;
+  };
+
+  const open = (i) => {
+    lastFocus = document.activeElement;
+    render(i);
+    modal.hidden = false;
+    document.body.classList.add("no-scroll");
+    requestAnimationFrame(() => modal.classList.add("is-open"));
+    modal.querySelector('[data-act="close"]').focus();
+  };
+
+  const close = () => {
+    modal.classList.remove("is-open");
+    document.body.classList.remove("no-scroll");
+    modal.hidden = true;
+    if (lastFocus) lastFocus.focus();
+  };
+
+  cards.forEach((card, i) => {
+    card.setAttribute("aria-haspopup", "dialog");
+    card.removeAttribute("aria-pressed");
+    card.addEventListener("click", () => open(i));
+  });
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) return close();
+    const act = e.target.closest("[data-act]")?.dataset.act;
+    if (act === "prev") render(current - 1);
+    if (act === "next") render(current + 1);
+    if (act === "close") close();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (modal.hidden) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") render(current - 1);
+    if (e.key === "ArrowRight") render(current + 1);
   });
 });
 
