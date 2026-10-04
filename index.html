@@ -45,8 +45,8 @@
       </h1>
 
       <p class="subtitle">
-        Actuellement Analytics Engineer en CDD chez <strong>Auchan France (Supply Chain)</strong>,
-        après deux années d'alternance au sein de la même équipe, je conçois et industrialise des
+        Actuellement Analytics Engineer en CDD chez <strong>Auchan France</strong>, au sein de l'équipe
+        <strong>Outils &amp; Méthodes de la Supply Chain</strong>, après deux années d'alternance, je conçois et industrialise des
         pipelines data sur BigQuery, afin de transformer des données brutes en jeux de données fiables,
         documentés et directement exploitables par les équipes métier et les outils BI.
       </p>
@@ -108,12 +108,17 @@
     <div class="card">
       <h2>À propos</h2>
       <p class="muted">
-      Après deux années d'alternance chez Auchan France (Supply Chain), réalisées dans le cadre de mon
-      Master MIASHS à Lille, j'occupe aujourd'hui un poste d'Analytics Engineer en CDD au sein de la
-      même équipe, dans la continuité directe des missions engagées durant mon alternance.
+      J'ai démarré mon alternance chez Auchan France, dans le cadre de mon Master MIASHS à Lille,
+      au sein de la <b>Direction de la Donnée</b>, aux côtés des équipes IT. En janvier 2025, j'ai rejoint
+      l'équipe <b>Outils &amp; Méthodes de la Supply Chain</b> : je travaille depuis au quotidien sur le
+      plateau métier, avec les approvisionneurs. J'y occupe aujourd'hui un poste d'Analytics Engineer en CDD.
       </p>
       <p class="muted" style="margin-top: 10px;">
-      Contrairement à un Data Analyst rattaché à un secteur métier précis 
+      Cette double expérience a levé le mur entre l'IT et le métier : je pars directement des vraies
+      problématiques du terrain, tout en garantissant les exigences techniques de l'IT.
+      </p>
+      <p class="muted" style="margin-top: 10px;">
+      Contrairement à un Data Analyst rattaché à un secteur métier précis
       (logistique, transport, commerce, produits frais…),
       un Analytics Engineer intervient <b>transversalement</b> auprès de l'ensemble des équipes data.
       Mon rôle consiste à comprendre les problématiques techniques des Data Analysts et les accompagner :
@@ -268,7 +273,7 @@
 
       <p class="muted muted">
         Faire le lien entre enjeux métiers, contraintes techniques et gouvernance data,
-        dans des environnements distribués et multi-équipes. 
+        dans des environnements distribués et multi-équipes.
         Le but étant de construire une donnée fiable, gouvernée et consommable, même quand elle ne m’appartient pas.
       </p>
     </div>
@@ -322,9 +327,10 @@
           <h3>Détails</h3>
           <div class="flip-back-content">
           <ul class="list">
-            <li>Migration de <b>293 alimentations de données</b> : transformation des requêtes programmées BigQuery en scripts Shell, associés à des DAGs YAML Airflow et versionnés sur GitLab.</li>
-            <li>Objectif : sortir des dépendances nominatives (requêtes programmées rattachées à une personne) pour passer sur des comptes de service partagés - continuité assurée même en cas d'absence ou de départ.</li>
-            <li>Passage sous <b>Terraform de 800 tables, vues et datasets</b> Supply Chain pour garantir le data ownership collectif et la gouvernance à l'échelle de l'équipe.</li>
+            <li><b>Point de départ</b> : la plupart des alimentations reposaient sur des requêtes programmées BigQuery, rattachées à la personne qui les avait créées. En cas d'absence ou de départ, impossible de les reprendre sans repartir de sa copie. Beaucoup tournaient aussi en environnement de dev alors qu'elles alimentaient des rapports Looker Studio utilisés au quotidien.</li>
+            <li><b>Étape 1 — consolider les fondations</b> : migration de <b>293 alimentations de données</b> vers des scripts Shell, en chargement complet ou incrémental avec historisation des changements selon le besoin, ordonnancés par des DAGs YAML Airflow qui reproduisent la planification d'origine, et versionnés sur GitLab avec CI/CD.</li>
+            <li>La donnée n'appartient plus à une personne mais à un groupe défini (compte de service, liste de diffusion), et chaque traitement est remis dans le bon environnement : dev pour développer, hors-production pour valider, puis production.</li>
+            <li><b>Étape 2 — encadrer avec Terraform</b> : passage sous <b>Terraform de 800 tables, vues et datasets</b> Supply Chain. Plus aucune modification manuelle : import des ressources existantes, plan pour simuler, apply pour garder BigQuery et Terraform alignés. Les évolutions de schéma (renommage ou suppression de champs) passent par une levée temporaire de la deletion protection, sans rompre la continuité de service.</li>
             <li>Terraformisation prioritaire des scripts alimentant le <b>TNL (Taux de Non Livraison)</b>, indicateur suivi à l'échelle de l'entreprise : marge d'erreur nulle, validation systématique en environnement de qualification avant bascule en production.</li>
             <li>Chantier mené dans le respect de l'échéance fixée par les Tech Leads au <b>31 mars</b>, date à partir de laquelle Terraform est devenu la norme obligatoire de gestion de l'infrastructure data chez Auchan, avec démantèlement complet de l'ancien ordonnanceur TWS sur le périmètre.</li>
             <li>Documentation + handover pour la reprise par l'équipe.</li>
@@ -472,7 +478,8 @@
               <li>Analyse d’incidents data et corrections.</li>
               <li>Optimisation BigQuery (coûts, partitions, perfs, bonnes pratiques).</li>
               <li>Refactoring de pipelines et amélioration de la maintenabilité.</li>
-              <li>Support Data Analysts / métiers + documentation.</li>
+              <li>Support quotidien des <b>Data Analysts</b> sur le framework (scripts Shell, DAGs Airflow, évolution de leurs tables sous Terraform), pour que les données exposées aux utilisateurs Supply Chain soient propres, optimisées et maîtrisées en stockage comme en coûts de facturation.</li>
+              <li>Documentation des pratiques de l'équipe.</li>
             </ul>
             <p class="muted" style="margin-top:10px;">
               Impact : moins d’incidents, meilleure performance, projets plus propres et durables.
@@ -534,13 +541,41 @@
               <li><b>Assistant Gestes Appro Hypermarché</b> : méthode répliquée pour les gestionnaires d'approvisionnement, managers commerce et réceptionnaires en magasin (9 gestes quotidiens, outils GCM/TC57/OOSH/RIL/Smartway).</li>
               <li><b>Chatbot documentation éditeur Logistar</b> : interroge l'ensemble des releases de l'éditeur pour retrouver la règle de gestion ou la fonctionnalité la plus à jour sur un sujet donné.</li>
               <li><b>Chatbot Topase</b> : cinquième assistant déployé sur ce même périmètre outil.</li>
-              <li>Outillage personnel : scripts Python (API Google Drive) développés pour automatiser la mise à jour des bases documentaires des assistants.</li>
+              <li>Mise à jour des bases documentaires automatisée par un <b>script Python</b> développé de A à Z (voir la carte dédiée).</li>
             </ul>
             <p class="muted" style="margin-top:10px;">
             Impact : <b>5 assistants</b> conçus et déployés en production, méthode reproductible (prompt directeur + playbooks + matrice d'incidents), moins de sollicitations data, meilleure autonomie des équipes.
             </p>
           </div>
           <span class="flip-hint">cliquez pour revenir ←</span>
+        </div>
+      </div>
+    </button>
+
+    <!-- Carte — Projet phare : script Python d'automatisation des chatbots -->
+    <button class="flip-card" type="button" aria-pressed="false">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <h3>Projet phare — Script Python d'automatisation des chatbots</h3>
+          <p class="muted">
+            Un projet mené seul de A à Z : de la page blanche à un script qui met à jour
+            automatiquement les bases documentaires des assistants IA.
+          </p>
+          <span class="flip-hint">cliquez pour agrandir ⤢</span>
+        </div>
+
+        <div class="flip-face flip-back" aria-hidden="true">
+          <h3>Détails</h3>
+          <div class="flip-back-content">
+            <ul class="list">
+              <li><b>Parti de zéro</b> : toutes les décisions sont les miennes, du choix des packages à l'architecture du code (programmation orientée objet, validation des données avec Pydantic), jusqu'au développement complet.</li>
+              <li><b>Ce que fait le script</b> : il récupère d'un seul coup les documents sources sur Google Drive via l'API, les convertit, puis met à jour automatiquement les bases documentaires des chatbots.</li>
+              <li><b>La vraie difficulté</b> : faire fonctionner Python et les API dans le cadre contraint d'une grande entreprise (droits d'accès, sécurité, environnements verrouillés), bien loin d'un projet personnel où tout est ouvert.</li>
+            </ul>
+            <p class="muted" style="margin-top:10px;">
+              Impact : plus de mise à jour manuelle des bases documentaires, des assistants toujours alimentés avec la dernière version des documents.
+            </p>
+          </div>
         </div>
       </div>
     </button>
@@ -698,7 +733,7 @@
 
 
 
-    
+
     <!-- PARCOURS -->
 <section class="panel" id="school" data-panel="school">
   <h2>Parcours</h2>
@@ -709,7 +744,7 @@
       <div class="timeline">
         <div class="step">
           <span>2024-2026</span>
-          <p><b>M1 &amp; M2 MIASHS (MQME)</b> - <b>Université de Lille</b>
+          <p><b>M1 &amp; M2 MIASHS (MQME)</b> - <b>Université de Lille</b>
             Alternance  <br/>Analytics Engineer · Auchan France (Supply Chain)</p>
         </div>
         <div class="step">
@@ -742,7 +777,7 @@
         <div class="step">
           <span>2019-2020</span>
           <p>
-          <b>Baccalauréat Scientifique option : Physique-Chimie</b><br/> 
+          <b>Baccalauréat Scientifique option : Physique-Chimie</b><br/>
           Lycée Yves Kernanec - Marcq-en-Baroeul<br/>
           </p>
         </div>
@@ -764,6 +799,7 @@
         <b>Analytics Engineer · Alternance</b>
         <p>08/2024 - 08/2026</p>
       </div>
+      <p class="muted">Direction de la Donnée (équipes IT), puis équipe Outils &amp; Méthodes de la Supply Chain à partir de janvier 2025</p>
 
       <ul class="list">
         <li>Construction et maintenance de <b>pipelines de données</b> (BigQuery, SQL)</li>
@@ -778,12 +814,12 @@
       <!-- CDD, dans la continuité directe de l'alternance -->
       <div class="subexp">
         <div class="subexp__title">
-          <b>Analytics Engineer · CDD</b> · Auchan France - Supply Chain
+          <b>Analytics Engineer · CDD</b> · Auchan France - Supply Chain, Outils &amp; Méthodes
           <p>09/2026 - 11/2026</p>
         </div>
 
         <ul class="list subexp__list">
-          <li>Poursuite de l'accompagnement de l'équipe, dans la continuité directe des missions de l'alternance</li>
+          <li>Intégré à l'équipe métier Outils &amp; Méthodes, au quotidien avec les approvisionneurs, dans la continuité directe des missions de l'alternance</li>
           <li>Pilotage opérationnel de la <b>migration Google Workspace → Microsoft</b> (BigQuery conservé, bascule des rapports Looker Studio vers Power BI)</li>
           <li>Mise en place des outils nécessaires à la bascule, à partir de l'audit d'inventaire réalisé en amont (22 collaborateurs, 11 500+ fichiers recensés)</li>
         </ul>
